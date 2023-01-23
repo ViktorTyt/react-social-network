@@ -1,11 +1,25 @@
 import { MoreVert } from "@mui/icons-material";
 import "./post.css";
-import { Users } from "../../dummyData";
-import { useState } from "react";
+import axios from "axios";
+import TimeAgo from "react-timeago";
+import { useEffect, useState } from "react";
 
 export default function Post({ post }) {
-  const [like, setLike] = useState(post.like);
+  const [user, setUser] = useState({});
+  const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
+
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  console.log(PF);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data } = await axios.get(`users/${post.userId}`);
+      setUser(data);
+    };
+
+    getUser();
+  }, [post.userId]);
 
   const likeHandler = () => {
     setLike(isLiked ? like - 1 : like + 1);
@@ -18,24 +32,21 @@ export default function Post({ post }) {
         <div className="postTop">
           <div className="postTopLeft">
             <img
-              src={
-                Users.filter((user) => user.id === post?.userId)[0]
-                  .profilePicture
-              }
+              src={user.profilePicture || PF + "person/not_found.png"}
               alt=""
               className="postProfileImg"
             />
-            <span className="postUserName">
-              {Users.filter((user) => user.id === post?.userId)[0].username}
+            <span className="postUserName">{user.username}</span>
+            <span className="postDate">
+              <TimeAgo date={post.createdAt} />
             </span>
-            <span className="postDate">{post.date}</span>
           </div>
           <div className="postTopRight"></div>
           <MoreVert />
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img src={post.photo} alt="" className="postImg" />
+          <img src={PF + post.img} alt="" className="postImg" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">

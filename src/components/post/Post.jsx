@@ -3,6 +3,7 @@ import "./post.css";
 import axios from "axios";
 import TimeAgo from "react-timeago";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Post({ post }) {
   const [user, setUser] = useState({});
@@ -10,11 +11,10 @@ export default function Post({ post }) {
   const [isLiked, setIsLiked] = useState(false);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  console.log(PF);
 
   useEffect(() => {
     const getUser = async () => {
-      const { data } = await axios.get(`users/${post.userId}`);
+      const { data } = await axios.get(`/users?userId=${post.userId}`);
       setUser(data);
     };
 
@@ -31,11 +31,14 @@ export default function Post({ post }) {
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-            <img
-              src={user.profilePicture || PF + "person/not_found.png"}
-              alt=""
-              className="postProfileImg"
-            />
+            <Link to={`/profile/${user.username}`}>
+              <img
+                src={user.profilePicture || PF + "person/not_found.png"}
+                alt=""
+                className="postProfileImg"
+              />
+            </Link>
+
             <span className="postUserName">{user.username}</span>
             <span className="postDate">
               <TimeAgo date={post.createdAt} />

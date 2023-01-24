@@ -63,6 +63,14 @@
   cursor: pointer;
 }
 
+.loginButton:focus {
+  outline:none;
+}
+
+.loginButton:disabled {
+  cursor: not-allowed;
+}
+
 .loginForgot {
   text-align: center;
   color: #1775ee;
@@ -79,4 +87,8 @@
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
+}
+
+.registerButton:focus {
+  outline: none;
 }

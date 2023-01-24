@@ -1,6 +1,24 @@
 import "./login.css";
+import { useRef } from "react";
+import { loginCall } from "../../apiCalls";
+import { CircularProgress } from "@mui/material";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Login() {
+  const email = useRef();
+  const password = useRef();
+  const { user, isFetching, error, dispatch } = useContext(AuthContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    loginCall(
+      { email: email.current.value, password: password.current.value },
+      dispatch
+    );
+  };
+
+  console.log(user);
   return (
     <div className="login">
       <div className="loginWrapper">
@@ -11,17 +29,39 @@ export default function Login() {
           </span>
         </div>
         <div className="loginRight">
-          <div className="loginBox">
-            <input placeholder="Email" type="email" className="loginInput" />
+          <form className="loginBox" onSubmit={handleSubmit}>
+            <input
+              placeholder="Email"
+              type="email"
+              required
+              className="loginInput"
+              ref={email}
+            />
             <input
               placeholder="Password"
               type="password"
+              required
+              minLength={6}
               className="loginInput"
+              ref={password}
             />
-            <button className="loginButton">Log In</button>
+            <button className="loginButton" type="submit" disabled={isFetching}>
+              {isFetching ? (
+                <CircularProgress color="inherit" size={20} />
+              ) : (
+                "Log In"
+              )}
+            </button>
             <span className="loginForgot">Forgot password?</span>
-            <button className="registerButton">Create a New Account</button>
-          </div>
+            <button className="registerButton">
+              {" "}
+              {isFetching ? (
+                <CircularProgress color="inherit" size={20} />
+              ) : (
+                "Create a New Account"
+              )}
+            </button>
+          </form>
         </div>
       </div>
     </div>

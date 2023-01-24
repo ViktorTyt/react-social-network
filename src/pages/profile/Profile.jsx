@@ -9,17 +9,23 @@ import { useParams } from "react-router-dom";
 
 export default function Profile() {
   const [user, setUser] = useState({});
+  console.log(user);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  let username = useParams();
+  let getParams = useParams();
+  console.log(getParams);
 
   useEffect(() => {
+    console.log("effect");
     const getUser = async () => {
-      const { data } = await axios.get(`/users?username=${username.username}`);
+      const { data } = await axios.get(
+        `http://localhost:8800/api/users?username=${getParams.username}`
+      );
       setUser(data);
     };
 
     getUser();
-  }, [username]);
+  }, [getParams.username]);
+
   return (
     <>
       <Topbar />
@@ -45,7 +51,7 @@ export default function Profile() {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Feed username={user.username} />
+            <Feed username={getParams.username} />
             <Rightbar user={user} />
           </div>
         </div>

@@ -6,12 +6,14 @@ import "./feed.css";
 
 export default function Feed({ username }) {
   const [posts, setPosts] = useState([]);
-  // console.log(username);
+  console.log(username);
   useEffect(() => {
     const getPosts = async () => {
       const { data } = username
-        ? await axios.get("/posts/profile/" + username)
-        : await axios.get("posts/timeline/63cc12dccb1b77d917b8f482");
+        ? await axios.get(`http://localhost:8800/api/posts/profile/${username}`)
+        : await axios.get(
+            "http://localhost:8800/api/posts/timeline/63cc12dccb1b77d917b8f482"
+          );
       setPosts(data);
     };
     getPosts();

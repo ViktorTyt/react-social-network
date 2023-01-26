@@ -9,7 +9,6 @@ export default function Feed({ username }) {
   const [posts, setPosts] = useState([]);
   const { user } = useContext(AuthContext);
 
-  console.log(username);
   useEffect(() => {
     const getPosts = async () => {
       const { data } = username
@@ -17,15 +16,22 @@ export default function Feed({ username }) {
         : await axios.get(
             "http://localhost:8800/api/posts/timeline/" + user._id
           );
-      setPosts(data);
+      setPosts(
+        data.sort((post1, post2) => {
+          return new Date(post2.createdAt) - new Date(post1.createdAt);
+        })
+      );
     };
     getPosts();
   }, [username, user._id]);
 
+  console.log(username);
+  console.log(user.username);
+
   return (
     <div className="feed">
       <div className="feedWrapper">
-        <Share />
+        {(!username || username === user.username) && <Share />}
         {posts.map((p) => (
           <Post key={p._id} post={p} />
         ))}

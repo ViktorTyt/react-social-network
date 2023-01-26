@@ -6,16 +6,18 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
 import "./profile.css";
 import { useParams } from "react-router-dom";
+// import { useContext } from "react";
+// import { AuthContext } from "../../context/AuthContext";
 
 export default function Profile() {
+  // const { user: userCont } = useContext(AuthContext);
   const [user, setUser] = useState({});
-  console.log(user);
+  // console.log(user);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   let getParams = useParams();
-  console.log(getParams);
 
   useEffect(() => {
-    console.log("effect");
+    // console.log("effect");
     const getUser = async () => {
       const { data } = await axios.get(
         `http://localhost:8800/api/users?username=${getParams.username}`
@@ -35,12 +37,20 @@ export default function Profile() {
           <div className="profileRightTop">
             <div className="profileCover">
               <img
-                src={user.coverPicture || PF + "post/8.jpeg"}
+                src={
+                  user.coverPicture
+                    ? PF + user.coverPicture
+                    : PF + "post/8.jpeg"
+                }
                 alt=""
                 className="profileCoverImg"
               />
               <img
-                src={user.profilePicture || PF + "person/not_found.png"}
+                src={
+                  user.profilePicture
+                    ? PF + user.profilePicture
+                    : PF + "person/not_found.png"
+                }
                 alt=""
                 className="profileUserImg"
               />

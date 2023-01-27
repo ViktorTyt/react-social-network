@@ -1,0 +1,10 @@
+@import "../../style.scss";
+
+.home {
+  @include themify($themes){
+      display: flex;
+      width: 100%;
+      background-color: themed("bgSoft");
+      // color: themed("textColor");
+  }
+}

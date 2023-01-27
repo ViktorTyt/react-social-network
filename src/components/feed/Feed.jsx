@@ -25,8 +25,8 @@ export default function Feed({ username }) {
     getPosts();
   }, [username, user._id]);
 
-  console.log(username);
-  console.log(user.username);
+  // console.log(username);
+  // console.log(user.username);
 
   return (
     <div className="feed">

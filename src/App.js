@@ -12,16 +12,18 @@ import Register from "./pages/register/Register";
 import Profile from "./pages/profile/Profile";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import { DarkModeContext } from "./context/darkModeContext";
 import Topbar from "./components/topbar/Topbar";
 import Sidebar from "./components/sidebar/Sidebar";
 import Rightbar from "./components/rightbar/Rightbar";
-
+import "./style.scss";
 function App() {
+  const { darkMode } = useContext(DarkModeContext);
   const { user } = useContext(AuthContext);
-  console.log(user);
+
   const Layout = () => {
     return (
-      <div>
+      <div className={`theme-${darkMode ? "dark" : "light"}`}>
         <Topbar />
         <div style={{ display: "flex" }}>
           <Sidebar />

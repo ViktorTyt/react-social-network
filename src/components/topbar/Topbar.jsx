@@ -11,13 +11,16 @@ import {
   PersonOutlined,
   EmailOutlined,
   NotificationsOutlined,
+  WbSunnyOutlined,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { DarkModeContext } from "../../context/darkModeContext";
 
 export default function Topbar() {
   const { user } = useContext(AuthContext);
+  const { darkMode, toggle } = useContext(DarkModeContext);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -28,7 +31,11 @@ export default function Topbar() {
           <span>Viktorsocial</span>
         </Link>
         <HomeOutlined />
-        <DarkModeOutlined />
+        {darkMode ? (
+          <WbSunnyOutlined onClick={toggle} />
+        ) : (
+          <DarkModeOutlined onClick={toggle} />
+        )}
         <GridViewOutlined />
         <div className="search">
           <SearchOutlined />

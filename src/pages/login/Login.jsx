@@ -1,5 +1,6 @@
-import "./login.css";
+import "./login.scss";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import { loginCall } from "../../apiCalls";
 import { CircularProgress } from "@mui/material";
 import { useContext } from "react";
@@ -21,44 +22,37 @@ export default function Login() {
   console.log(user);
   return (
     <div className="login">
-      <div className="loginWrapper">
-        <div className="loginLeft">
-          <h3 className="loginLogo">Viktorsocial</h3>
-          <span className="loginDesc">
-            Connect with friends and the world around you on Viktorsocial
-          </span>
+      <div className="card">
+        <div className="left">
+          <h1>Hello Ukraine!</h1>
+          <p>Connect with friends and the world around you on Viktorsocial</p>
+          <span>Don't you have an account?</span>
+          <Link to="/register">
+            <button>
+              {isFetching ? (
+                <CircularProgress color="inherit" size={20} />
+              ) : (
+                "Register"
+              )}
+            </button>
+          </Link>
         </div>
-        <div className="loginRight">
-          <form className="loginBox" onSubmit={handleSubmit}>
-            <input
-              placeholder="Email"
-              type="email"
-              required
-              className="loginInput"
-              ref={email}
-            />
+        <div className="right">
+          <h1>Login</h1>
+          <form onSubmit={handleSubmit}>
+            <input placeholder="Email" type="email" required ref={email} />
             <input
               placeholder="Password"
               type="password"
               required
               minLength={6}
-              className="loginInput"
               ref={password}
             />
-            <button className="loginButton" type="submit" disabled={isFetching}>
+            <button type="submit" disabled={isFetching}>
               {isFetching ? (
                 <CircularProgress color="inherit" size={20} />
               ) : (
                 "Log In"
-              )}
-            </button>
-            <span className="loginForgot">Forgot password?</span>
-            <button className="registerButton">
-              {" "}
-              {isFetching ? (
-                <CircularProgress color="inherit" size={20} />
-              ) : (
-                "Create a New Account"
               )}
             </button>
           </form>

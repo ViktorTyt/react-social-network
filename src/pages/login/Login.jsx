@@ -1,25 +1,41 @@
 import "./login.scss";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { loginCall } from "../../apiCalls";
-import { CircularProgress } from "@mui/material";
+// import { loginCall } from "../../apiCalls";
+// import { CircularProgress } from "@mui/material";
 import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+// import { AuthContext } from "../../context/AuthContext";
+import { TestAuthContext } from "../../context/testAuthContext";
 
 export default function Login() {
   const email = useRef();
   const password = useRef();
-  const { user, isFetching, error, dispatch } = useContext(AuthContext);
+  // const { user, isFetching, error, dispatch } = useContext(AuthContext);
+  const { login } = useContext(TestAuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    loginCall(
-      { email: email.current.value, password: password.current.value },
-      dispatch
-    );
+    login({
+      _id: "63cc12c3cb1b77d917b8f480",
+      username: "Viktor Tytenko",
+      email: "viktor@gmail.com",
+      profilePicture: "person/5.jpeg",
+      coverPicture:
+        "https://images.pexels.com/photos/3228727/pexels-photo-3228727.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      followers: ["63cc12dccb1b77d917b8f482"],
+      isAdmin: false,
+      followings: [],
+      city: "Kyiv",
+      from: "Poltava",
+      relationship: 1,
+    });
+    // loginCall(
+    //   { email: email.current.value, password: password.current.value },
+    //   dispatch
+    // );
   };
 
-  console.log(user);
+  // console.log(user);
   return (
     <div className="login">
       <div className="card">
@@ -29,11 +45,12 @@ export default function Login() {
           <span>Don't you have an account?</span>
           <Link to="/register">
             <button>
-              {isFetching ? (
+              Register
+              {/* {isFetching ? (
                 <CircularProgress color="inherit" size={20} />
               ) : (
                 "Register"
-              )}
+              )} */}
             </button>
           </Link>
         </div>
@@ -48,12 +65,14 @@ export default function Login() {
               minLength={6}
               ref={password}
             />
-            <button type="submit" disabled={isFetching}>
-              {isFetching ? (
+            {/* <button type="submit" disabled={isFetching}> */}
+            <button type="submit">
+              Login
+              {/* {isFetching ? (
                 <CircularProgress color="inherit" size={20} />
               ) : (
                 "Log In"
-              )}
+              )} */}
             </button>
           </form>
         </div>

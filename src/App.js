@@ -9,17 +9,21 @@ import {
 } from "react-router-dom";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
-import Profile from "./pages/profile/Profile";
+// import Profile from "./pages/profile/Profile";
+import ProfileTest from "./pages/profileTest/ProfileTest";
 import { useContext } from "react";
-import { AuthContext } from "./context/AuthContext";
+// import { AuthContext } from "./context/AuthContext";
 import { DarkModeContext } from "./context/darkModeContext";
 import Topbar from "./components/topbar/Topbar";
 import Sidebar from "./components/sidebar/Sidebar";
 import Rightbar from "./components/rightbar/Rightbar";
 import "./style.scss";
+
+import { TestAuthContext } from "./context/testAuthContext";
 function App() {
   const { darkMode } = useContext(DarkModeContext);
-  const { user } = useContext(AuthContext);
+  const { currentUser } = useContext(TestAuthContext);
+  console.log("app");
 
   const Layout = () => {
     return (
@@ -37,7 +41,7 @@ function App() {
   };
 
   const ProtectedRoute = ({ children }) => {
-    if (!user) {
+    if (!currentUser) {
       return <Navigate to="/login" />;
     }
 
@@ -59,7 +63,7 @@ function App() {
         },
         {
           path: "/profile/:id",
-          element: <Profile />,
+          element: <ProfileTest />,
         },
       ],
     },

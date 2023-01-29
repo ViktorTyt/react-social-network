@@ -40,14 +40,20 @@ $themes:(
   @return map-get($theme-map, $key);
 }
 
-@mixin mobile {
-  @media (max-width: 480px) {
+@mixin mobileOnly {
+  @media (max-width: 767px) {
     @content;
   }
 }
 
 @mixin tablet {
-  @media (max-width: 960px) {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (mix-width: 1024px) {
     @content;
   }
 }

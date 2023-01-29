@@ -12,13 +12,18 @@ import Messages from "../../assets/10.png";
 import Tutorials from "../../assets/11.png";
 import Courses from "../../assets/12.png";
 import Fund from "../../assets/13.png";
-import { AuthContext } from "../../context/AuthContext";
+// import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
+import { TestAuthContext } from "../../context/testAuthContext";
 
 export default function Sidebar() {
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
+  const { currentUser } = useContext(TestAuthContext);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  console.log(PF);
+
+  console.log("sidebar");
 
   return (
     <div className="sideBar">
@@ -27,14 +32,14 @@ export default function Sidebar() {
           <div className="user">
             <img
               src={
-                user.profilePicture
-                  ? PF + user.profilePicture
+                currentUser.profilePicture
+                  ? PF + currentUser.profilePicture
                   : PF + "person/not_found.png"
               }
               alt="1.jpeg"
               className="topbarImg"
             />
-            <span>{user.username}</span>
+            <span>{currentUser.username}</span>
           </div>
           <div className="item">
             <img src={Friends} alt="" />

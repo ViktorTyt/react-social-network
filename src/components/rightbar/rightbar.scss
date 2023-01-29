@@ -2,13 +2,17 @@
 
 .rightbar {
   @include themify($themes){
-    flex: 3;
-    position: sticky;
-    top: 70px;
-    height: calc(100vh - 70px);
-    overflow: scroll;
-    background-color: themed("bgSoft");
-    color: themed("textColor");
+    display: none;
+
+    @include desktop {
+      flex: 3;
+      position: sticky;
+      top: 70px;
+      height: calc(100vh - 70px);
+      overflow: scroll;
+      background-color: themed("bgSoft");
+      color: themed("textColor");
+    }
 
     &::-webkit-scrollbar {
       display: none;

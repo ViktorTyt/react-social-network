@@ -15,14 +15,19 @@ import {
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+// import { AuthContext } from "../../context/AuthContext";
 import { DarkModeContext } from "../../context/darkModeContext";
+import { TestAuthContext } from "../../context/testAuthContext";
 
 export default function Topbar() {
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
+  const { currentUser } = useContext(TestAuthContext);
   const { darkMode, toggle } = useContext(DarkModeContext);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  console.log("topbar");
+  console.log(currentUser);
 
   return (
     <div className="topbar">
@@ -49,14 +54,14 @@ export default function Topbar() {
         <div className="user">
           <img
             src={
-              user.profilePicture
-                ? PF + user.profilePicture
+              currentUser.profilePicture
+                ? PF + currentUser.profilePicture
                 : PF + "person/not_found.png"
             }
             alt="1.jpeg"
             className="topbarImg"
           />
-          <span>John Doe</span>
+          <span>{currentUser.username}</span>
         </div>
       </div>
     </div>

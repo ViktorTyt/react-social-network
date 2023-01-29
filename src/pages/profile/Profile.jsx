@@ -61,7 +61,7 @@ export default function Profile() {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Feed username={getParams.username} />
+            {/* <Feed username={getParams.username} /> */}
             {/* <Rightbar user={user} /> */}
           </div>
         </div>

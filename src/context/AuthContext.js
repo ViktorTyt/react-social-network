@@ -5,10 +5,10 @@ import AuthReducer from "./AuthReducer";
 const INITIAL_STATE = {
   user: {
     _id: "63cc12c3cb1b77d917b8f480",
-    username: "viktor",
+    username: "Viktor Tytenko",
     email: "viktor@gmail.com",
     profilePicture: "person/5.jpeg",
-    coverPicture: "",
+    coverPicture: "post/9.jpeg",
     followers: ["63cc12dccb1b77d917b8f482"],
     isAdmin: false,
     followings: [],

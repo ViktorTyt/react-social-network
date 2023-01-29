@@ -3,8 +3,17 @@
 .home {
   @include themify($themes){
       display: flex;
-      width: 100%;
+      flex-direction: column;
+      padding: 10px;
       background-color: themed("bgSoft");
-      // color: themed("textColor");
+      color: themed("textColor");
+
+      @include tablet {
+        padding: 20px;
+      }
+
+      @include desktop {
+        padding: 10px 70px;
+      }
   }
 }

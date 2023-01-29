@@ -11,6 +11,7 @@ export const StoriesWrapper = styled.section`
   ${device.tablet} {
     height: 150px;
     gap: 20px;
+    padding: 20px 0;
   }
 
   ${device.desktop} {

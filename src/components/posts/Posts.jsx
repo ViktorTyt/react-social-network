@@ -1,5 +1,6 @@
 import "./posts.scss";
 import PostTest from "../postTest/PostTest";
+import { PostsList } from "./Posts.styled";
 
 export default function Posts() {
   //TEMPORARY
@@ -22,10 +23,10 @@ export default function Posts() {
   ];
 
   return (
-    <div className="posts">
+    <PostsList className="posts">
       {posts.map((post) => (
         <PostTest post={post} key={post.id} />
       ))}
-    </div>
+    </PostsList>
   );
 }

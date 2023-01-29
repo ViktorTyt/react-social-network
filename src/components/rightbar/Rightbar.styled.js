@@ -65,11 +65,11 @@ export const UserButtons = styled.div`
     color: white;
     cursor: pointer;
 
-    &:first-child {
+    &:first-of-type {
       background-color: #5271ff;
     }
 
-    &:last-child {
+    &:last-of-type {
       background-color: #f0544f;
     }
   }

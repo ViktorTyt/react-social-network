@@ -58,7 +58,7 @@ export const SearchInput = styled.input`
   }
 
   ${device.desktop} {
-    width: 300px;
+    min-width: 350px;
   }
 
   &:focus {

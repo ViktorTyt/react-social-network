@@ -35,6 +35,7 @@ export const GlobalStyles = css`
     padding-left: 0;
     margin: 0;
   }
+
   button {
     padding: 0;
     border: none;

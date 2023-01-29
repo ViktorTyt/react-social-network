@@ -1,25 +1,36 @@
-import "./shareTest.scss";
+// import "./shareTest.scss";
 import Image from "../../assets/img.png";
 import Map from "../../assets/map.png";
 import Friend from "../../assets/friend.png";
 import { useContext } from "react";
 import { TestAuthContext } from "../../context/testAuthContext";
+import {
+  ShareBottom,
+  ShareBottomLeft,
+  ShareBottomRight,
+  ShareContainer,
+  ShareTop,
+  ShareWrapper,
+} from "./ShareTest.styled";
 
 const Share = () => {
   const { currentUser } = useContext(TestAuthContext);
+
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   return (
-    <div className="share">
-      <div className="container">
-        <div className="top">
-          <img src={currentUser.profilePic} alt="" />
+    <ShareWrapper className="share">
+      <ShareContainer className="container">
+        <ShareTop className="top">
+          <img src={PF + currentUser.profilePicture} alt="" />
           <input
             type="text"
             placeholder={`What's on your mind ${currentUser.name}?`}
           />
-        </div>
+        </ShareTop>
         <hr />
-        <div className="bottom">
-          <div className="left">
+        <ShareBottom className="bottom">
+          <ShareBottomLeft className="left">
             <input type="file" id="file" style={{ display: "none" }} />
             <label htmlFor="file">
               <div className="item">
@@ -35,13 +46,13 @@ const Share = () => {
               <img src={Friend} alt="" />
               <span>Tag Friends</span>
             </div>
-          </div>
-          <div className="right">
+          </ShareBottomLeft>
+          <ShareBottomRight className="right">
             <button>Share</button>
-          </div>
-        </div>
-      </div>
-    </div>
+          </ShareBottomRight>
+        </ShareBottom>
+      </ShareContainer>
+    </ShareWrapper>
   );
 };
 

@@ -1,9 +1,13 @@
 import { useContext } from "react";
 import "./comments.scss";
 import { TestAuthContext } from "../../context/testAuthContext";
+import { CommentBox, CommentsWrapper, Item } from "./Commets.styled";
 
 const Comments = () => {
   const { currentUser } = useContext(TestAuthContext);
+
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   //Temporary
   const comments = [
     {
@@ -24,23 +28,25 @@ const Comments = () => {
     },
   ];
   return (
-    <div className="comments">
-      <div className="write">
-        <img src={currentUser.profilePic} alt="" />
+    <CommentsWrapper className="comments">
+      <CommentBox className="write">
+        <img src={PF + currentUser.profilePicture} alt="" />
         <input type="text" placeholder="write a comment" />
         <button>Send</button>
-      </div>
-      {comments.map((comment) => (
-        <div className="comment">
-          <img src={comment.profilePicture} alt="" />
-          <div className="info">
-            <span>{comment.name}</span>
-            <p>{comment.desc}</p>
-          </div>
-          <span className="date">1 hour ago</span>
-        </div>
-      ))}
-    </div>
+      </CommentBox>
+      <ul>
+        {comments.map((comment) => (
+          <Item className="comment" key={comment.id}>
+            <img src={comment.profilePicture} alt="" />
+            <div className="info">
+              <span>{comment.name}</span>
+              <p>{comment.desc}</p>
+            </div>
+            <span className="date">1 hour ago</span>
+          </Item>
+        ))}
+      </ul>
+    </CommentsWrapper>
   );
 };
 

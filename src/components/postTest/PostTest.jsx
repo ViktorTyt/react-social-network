@@ -1,4 +1,4 @@
-import "./postTest.scss";
+// import "./postTest.scss";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import TextsmsOutlinedIcon from "@mui/icons-material/TextsmsOutlined";
@@ -7,8 +7,19 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Link } from "react-router-dom";
 import Comments from "../comments/Comments";
 import { useState } from "react";
+import {
+  PostItem,
+  PostContainer,
+  User,
+  UserInfo,
+  UserInfoDetails,
+  UserInfoName,
+  UserInfoDate,
+  PostContent,
+  PostInfo,
+} from "./PostTest.module";
 
-const Post = ({ post }) => {
+const PostTest = ({ post }) => {
   const [commentOpen, setCommentOpen] = useState(false);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -17,28 +28,28 @@ const Post = ({ post }) => {
   const liked = false;
 
   return (
-    <div className="post">
-      <div className="container">
-        <div className="user">
-          <div className="userInfo">
+    <PostItem className="post">
+      <PostContainer className="container">
+        <User className="user">
+          <UserInfo className="userInfo">
             <img src={PF + post.profilePic} alt="" />
-            <div className="details">
+            <UserInfoDetails className="details">
               <Link
                 to={`/profile/${post.userId}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <span className="name">{post.name}</span>
+                <UserInfoName className="name">{post.name}</UserInfoName>
               </Link>
-              <span className="date">1 min ago</span>
-            </div>
-          </div>
+              <UserInfoDate className="date">1 min ago</UserInfoDate>
+            </UserInfoDetails>
+          </UserInfo>
           <MoreHorizIcon />
-        </div>
-        <div className="content">
+        </User>
+        <PostContent className="content">
           <p>{post.desc}</p>
           <img src={post.img} alt="" />
-        </div>
-        <div className="info">
+        </PostContent>
+        <PostInfo className="info">
           <div className="item">
             {liked ? <FavoriteOutlinedIcon /> : <FavoriteBorderOutlinedIcon />}
             12 Likes
@@ -51,11 +62,11 @@ const Post = ({ post }) => {
             <ShareOutlinedIcon />
             Share
           </div>
-        </div>
+        </PostInfo>
         {commentOpen && <Comments />}
-      </div>
-    </div>
+      </PostContainer>
+    </PostItem>
   );
 };
 
-export default Post;
+export default PostTest;

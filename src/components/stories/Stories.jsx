@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import { TestAuthContext } from "../../context/testAuthContext";
 
-import "./stories.scss";
+// import "./stories.scss";
+import { StoriesWrapper, Story } from "./Stories.styled";
 
 const Stories = () => {
   const { currentUser } = useContext(TestAuthContext);
@@ -31,19 +32,19 @@ const Stories = () => {
   ];
 
   return (
-    <section className="stories">
-      <div className="story">
+    <StoriesWrapper className="stories">
+      <Story className="story">
         <img src={currentUser.coverPicture} alt="" />
         <span>{currentUser.username}</span>
         <button>+</button>
-      </div>
+      </Story>
       {stories.map((story) => (
-        <div className="story" key={story.id}>
+        <Story className="story" key={story.id}>
           <img src={story.img} alt="" />
           <span>{story.name}</span>
-        </div>
+        </Story>
       ))}
-    </section>
+    </StoriesWrapper>
   );
 };
 

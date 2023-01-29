@@ -1,4 +1,4 @@
-import "./sidebar.scss";
+// import "./sidebar.scss";
 import Friends from "../../assets/1.png";
 import Groups from "../../assets/2.png";
 import Market from "../../assets/3.png";
@@ -15,6 +15,19 @@ import Fund from "../../assets/13.png";
 // import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
 import { TestAuthContext } from "../../context/testAuthContext";
+import {
+  Menu,
+  Item,
+  SidebarContainer,
+  SidebarWrapper,
+  User,
+  UserImg,
+  ItemImg,
+  UserTitle,
+  ItemTitle,
+  MenuTitle,
+  Hr,
+} from "./Sidebar.styled";
 
 export default function Sidebar() {
   // const { user } = useContext(AuthContext);
@@ -26,11 +39,11 @@ export default function Sidebar() {
   console.log("sidebar");
 
   return (
-    <div className="sideBar">
-      <div className="container">
-        <div className="menu">
-          <div className="user">
-            <img
+    <SidebarWrapper>
+      <SidebarContainer>
+        <Menu className="menu">
+          <User className="user">
+            <UserImg
               src={
                 currentUser.profilePicture
                   ? PF + currentUser.profilePicture
@@ -39,70 +52,70 @@ export default function Sidebar() {
               alt="1.jpeg"
               className="topbarImg"
             />
-            <span>{currentUser.username}</span>
-          </div>
-          <div className="item">
-            <img src={Friends} alt="" />
+            <UserTitle>{currentUser.username}</UserTitle>
+          </User>
+          <Item className="item">
+            <ItemImg src={Friends} alt="" />
             <span>Friends</span>
-          </div>
-          <div className="item">
-            <img src={Groups} alt="" />
+          </Item>
+          <Item className="item">
+            <ItemImg src={Groups} alt="" />
             <span>Groups</span>
-          </div>
-          <div className="item">
-            <img src={Market} alt="" />
+          </Item>
+          <Item className="item">
+            <ItemImg src={Market} alt="" />
             <span>Marketplace</span>
-          </div>
-          <div className="item">
-            <img src={Watch} alt="" />
+          </Item>
+          <Item className="item">
+            <ItemImg src={Watch} alt="" />
             <span>Watch</span>
-          </div>
-          <div className="item">
-            <img src={Memories} alt="" />
+          </Item>
+          <Item className="item">
+            <ItemImg src={Memories} alt="" />
             <span>Memories</span>
-          </div>
-        </div>
-        <hr />
-        <div className="menu">
-          <span>Your shortcuts</span>
-          <div className="item">
-            <img src={Events} alt="" />
-            <span>Events</span>
-          </div>
-          <div className="item">
-            <img src={Gaming} alt="" />
-            <span>Gaming</span>
-          </div>
-          <div className="item">
-            <img src={Gallery} alt="" />
-            <span>Gallery</span>
-          </div>
-          <div className="item">
-            <img src={Videos} alt="" />
-            <span>Videos</span>
-          </div>
-          <div className="item">
-            <img src={Messages} alt="" />
-            <span>Messages</span>
-          </div>
-        </div>
-        <hr />
-        <div className="menu">
-          <span>Others</span>
-          <div className="item">
-            <img src={Fund} alt="" />
-            <span>Fundraiser</span>
-          </div>
-          <div className="item">
-            <img src={Tutorials} alt="" />
-            <span>Tutorials</span>
-          </div>
-          <div className="item">
-            <img src={Courses} alt="" />
-            <span>Courses</span>
-          </div>
-        </div>
-      </div>
-    </div>
+          </Item>
+        </Menu>
+        <Hr />
+        <Menu className="menu">
+          <MenuTitle>Your shortcuts</MenuTitle>
+          <Item className="item">
+            <ItemImg src={Events} alt="" />
+            <ItemTitle>Events</ItemTitle>
+          </Item>
+          <Item className="item">
+            <ItemImg src={Gaming} alt="" />
+            <ItemTitle>Gaming</ItemTitle>
+          </Item>
+          <Item className="item">
+            <ItemImg src={Gallery} alt="" />
+            <ItemTitle>Gallery</ItemTitle>
+          </Item>
+          <Item className="item">
+            <ItemImg src={Videos} alt="" />
+            <ItemTitle>Videos</ItemTitle>
+          </Item>
+          <Item className="item">
+            <ItemImg src={Messages} alt="" />
+            <ItemTitle>Messages</ItemTitle>
+          </Item>
+        </Menu>
+        <Hr />
+        <Menu className="menu">
+          <MenuTitle>Others</MenuTitle>
+          <Item className="item">
+            <ItemImg src={Fund} alt="" />
+            <ItemTitle>Fundraiser</ItemTitle>
+          </Item>
+          <Item className="item">
+            <ItemImg src={Tutorials} alt="" />
+            <ItemTitle>Tutorials</ItemTitle>
+          </Item>
+          <Item className="item">
+            <ItemImg src={Courses} alt="" />
+            <ItemTitle>Courses</ItemTitle>
+          </Item>
+        </Menu>
+      </SidebarContainer>
+    </SidebarWrapper>
   );
 }

@@ -1,4 +1,14 @@
-import "./topbar.scss";
+// import "./topbar.scss";
+import {
+  Header,
+  Logo,
+  NavLeft,
+  SearchContainer,
+  SearchInput,
+  UserContainer,
+  UserImg,
+  UserInfo,
+} from "./Topbar.styled.js";
 import {
   Person,
   Search,
@@ -30,10 +40,10 @@ export default function Topbar() {
   console.log(currentUser);
 
   return (
-    <div className="topbar">
-      <div className="left">
+    <Header>
+      <NavLeft>
         <Link style={{ textDecoration: "none" }}>
-          <span>Viktorsocial</span>
+          <Logo>Viktorsocial</Logo>
         </Link>
         <HomeOutlined />
         {darkMode ? (
@@ -42,29 +52,28 @@ export default function Topbar() {
           <DarkModeOutlined onClick={toggle} />
         )}
         <GridViewOutlined />
-        <div className="search">
-          <SearchOutlined />
-          <input type="text" placeholder="Search..." />
-        </div>
-      </div>
-      <div className="right">
+      </NavLeft>
+      <SearchContainer>
+        <SearchOutlined />
+        <SearchInput type="text" placeholder="Search..." />
+      </SearchContainer>
+      <UserContainer>
         <PersonOutlined />
         <EmailOutlined />
         <NotificationsOutlined />
-        <div className="user">
-          <img
+        <UserInfo>
+          <UserImg
             src={
               currentUser.profilePicture
                 ? PF + currentUser.profilePicture
                 : PF + "person/not_found.png"
             }
             alt="1.jpeg"
-            className="topbarImg"
           />
           <span>{currentUser.username}</span>
-        </div>
-      </div>
-    </div>
+        </UserInfo>
+      </UserContainer>
+    </Header>
   );
 
   // return (

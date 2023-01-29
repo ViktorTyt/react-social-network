@@ -1,4 +1,4 @@
-import "./rightbar.scss";
+// import "./rightbar.scss";
 import { Users } from "../../dummyData";
 import Online from "../online/Online";
 import axios from "axios";
@@ -6,19 +6,34 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { Add, Remove } from "@mui/icons-material";
+import {
+  Item,
+  ItemTitle,
+  OnlineDot,
+  RightbarContainer,
+  RightbarWrapper,
+  User,
+  UserButtons,
+  UserCnahges,
+  UserImg,
+  UserInfo,
+  UserTitle,
+} from "./Rightbar.styled";
 const URL = "http://localhost:8800/api/";
+
 export default function Rightbar() {
   const { user } = useContext(AuthContext);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   return (
-    <section className="rightbar">
-      <div className="container">
-        <div className="item">
-          <span>Suggestion For You</span>
-          <div className="user">
-            <div className="userInfo">
-              <img
+    <RightbarWrapper className="rightbar">
+      <RightbarContainer className="container">
+        <Item className="item">
+          <ItemTitle>Suggestion For You</ItemTitle>
+          <User className="user">
+            <UserInfo className="userInfo">
+              <UserImg
                 src={
                   user?.profilePicture
                     ? PF + user?.profilePicture
@@ -26,16 +41,16 @@ export default function Rightbar() {
                 }
                 alt="1.jpeg"
               />
-              <span>John Doe</span>
-            </div>
-            <div className="buttons">
+              <UserTitle>John Doe</UserTitle>
+            </UserInfo>
+            <UserButtons className="buttons">
               <button>Follow</button>
               <button>Dismiss</button>
-            </div>
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
+            </UserButtons>
+          </User>
+          <User className="user">
+            <UserInfo className="userInfo">
+              <UserImg
                 src={
                   user?.profilePicture
                     ? PF + user?.profilePicture
@@ -43,16 +58,19 @@ export default function Rightbar() {
                 }
                 alt="1.jpeg"
               />
-              <span>John Doe</span>
-            </div>
-            <div className="buttons">
+              <UserTitle>John Doe</UserTitle>
+            </UserInfo>
+            <UserButtons className="buttons">
               <button>Follow</button>
               <button>Dismiss</button>
-            </div>
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
+            </UserButtons>
+          </User>
+        </Item>
+        <Item className="item">
+          <ItemTitle>Latest Activities</ItemTitle>
+          <User className="user">
+            <UserInfo className="userInfo">
+              <UserImg
                 src={
                   user?.profilePicture
                     ? PF + user?.profilePicture
@@ -60,19 +78,15 @@ export default function Rightbar() {
                 }
                 alt="1.jpeg"
               />
-              <span>John Doe</span>
-            </div>
-            <div className="buttons">
-              <button>Follow</button>
-              <button>Dismiss</button>
-            </div>
-          </div>
-        </div>
-        <div className="item">
-          <span>Latest Activities</span>
-          <div className="user">
-            <div className="userInfo">
-              <img
+              <UserTitle>
+                John Doe <span>changing their cover picture</span>
+              </UserTitle>
+            </UserInfo>
+            <UserCnahges>1 min ago</UserCnahges>
+          </User>
+          <User className="user">
+            <UserInfo className="userInfo">
+              <UserImg
                 src={
                   user?.profilePicture
                     ? PF + user?.profilePicture
@@ -80,15 +94,18 @@ export default function Rightbar() {
                 }
                 alt="1.jpeg"
               />
-              <p>
-                <span>John Doe</span> changing their cover picture
-              </p>
-            </div>
-            <span>1 min ago</span>
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
+              <UserTitle>
+                John Doe <span>changing their cover picture</span>
+              </UserTitle>
+            </UserInfo>
+            <UserCnahges>1 min ago</UserCnahges>
+          </User>
+        </Item>
+        <Item className="item">
+          <ItemTitle>Online Friends</ItemTitle>
+          <User className="user">
+            <UserInfo className="userInfo">
+              <UserImg
                 src={
                   user?.profilePicture
                     ? PF + user?.profilePicture
@@ -96,15 +113,13 @@ export default function Rightbar() {
                 }
                 alt="1.jpeg"
               />
-              <p>
-                <span>John Doe</span> changing their cover picture
-              </p>
-            </div>
-            <span>1 min ago</span>
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
+              <OnlineDot className="online"></OnlineDot>
+              <UserTitle>John Doe</UserTitle>
+            </UserInfo>
+          </User>
+          <User className="user">
+            <UserInfo className="userInfo">
+              <UserImg
                 src={
                   user?.profilePicture
                     ? PF + user?.profilePicture
@@ -112,32 +127,13 @@ export default function Rightbar() {
                 }
                 alt="1.jpeg"
               />
-              <p>
-                <span>John Doe</span> changing their cover picture
-              </p>
-            </div>
-            <span>1 min ago</span>
-          </div>
-        </div>
-        <div className="item">
-          <span>Online Friends</span>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src={
-                  user?.profilePicture
-                    ? PF + user?.profilePicture
-                    : PF + "person/not_found.png"
-                }
-                alt="1.jpeg"
-              />
-              <div className="online"></div>
-              <span>John Doe</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+              <OnlineDot className="online"></OnlineDot>
+              <UserTitle>John Doe</UserTitle>
+            </UserInfo>
+          </User>
+        </Item>
+      </RightbarContainer>
+    </RightbarWrapper>
   );
 }
 

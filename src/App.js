@@ -21,13 +21,13 @@ import "./style.scss";
 
 import { TestAuthContext } from "./context/testAuthContext";
 function App() {
-  const { darkMode } = useContext(DarkModeContext);
+  // const { darkMode } = useContext(DarkModeContext);
   const { currentUser } = useContext(TestAuthContext);
   console.log("app");
 
   const Layout = () => {
     return (
-      <div className={`theme-${darkMode ? "dark" : "light"}`}>
+      <>
         <Topbar />
         <div style={{ display: "flex" }}>
           <Sidebar />
@@ -36,7 +36,7 @@ function App() {
           </div>
           <Rightbar />
         </div>
-      </div>
+      </>
     );
   };
 

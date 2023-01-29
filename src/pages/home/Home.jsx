@@ -6,21 +6,21 @@ import Stories from "../../components/stories/Stories";
 import Topbar from "../../components/topbar/Topbar";
 import ShareTest from "../../components/shareTest/ShareTest";
 
-import "./home.scss";
+import { HomeWrapper } from "./Home.styled";
 
 export default function Home() {
   console.log("home");
   return (
     <>
       {/* <Topbar /> */}
-      <div className="home">
+      <HomeWrapper>
         <Stories />
-        <ShareTest />
-        <Posts />
+        {/* <ShareTest />
+        <Posts /> */}
         {/* <Sidebar /> */}
         {/* <Feed /> */}
         {/* <Rightbar /> */}
-      </div>
+      </HomeWrapper>
     </>
   );
 }

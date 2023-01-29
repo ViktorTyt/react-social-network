@@ -5,16 +5,28 @@ import App from "./App";
 // import { AuthContextProvider } from "./context/AuthContext";
 import { DarkModeContextProvider } from "./context/darkModeContext";
 import { TestAuthContextProvider } from "./context/testAuthContext";
+import { Provider } from "react-redux";
+import store, { persistor } from "redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+import { GlobalStyles, theme } from "styles";
+import { Global, ThemeProvider } from "@emotion/react";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
   // <AuthContextProvider>
-  <DarkModeContextProvider>
-    <TestAuthContextProvider>
-      <App />
-    </TestAuthContextProvider>
-  </DarkModeContextProvider>
+  <ThemeProvider theme={theme}>
+    <Global styles={GlobalStyles} />
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <DarkModeContextProvider>
+          <TestAuthContextProvider>
+            <App />
+          </TestAuthContextProvider>
+        </DarkModeContextProvider>
+      </PersistGate>
+    </Provider>
+  </ThemeProvider>
   // </AuthContextProvider>
   // </React.StrictMode>
 );

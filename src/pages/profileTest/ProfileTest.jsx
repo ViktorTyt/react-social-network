@@ -1,4 +1,3 @@
-import "./profileTest.scss";
 import FacebookTwoToneIcon from "@mui/icons-material/FacebookTwoTone";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -11,10 +10,20 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Posts from "../../components/posts/Posts";
 import ShareTest from "../../components/shareTest/ShareTest";
 
+import {
+  ProfileWrapper,
+  Images,
+  PofileContainer,
+  UserInfo,
+  UserInfoLeft,
+  UserInfoCenter,
+  UserInfoRight,
+} from "./ProfileTest.styled";
+
 const Profile = () => {
   return (
-    <div className="profile">
-      <div className="images">
+    <ProfileWrapper className="profile">
+      <Images className="images">
         <img
           src="https://images.pexels.com/photos/13440765/pexels-photo-13440765.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
           alt=""
@@ -25,10 +34,10 @@ const Profile = () => {
           alt=""
           className="profilePic"
         />
-      </div>
-      <div className="profileContainer">
-        <div className="uInfo">
-          <div className="left">
+      </Images>
+      <PofileContainer className="profileContainer">
+        <UserInfo className="uInfo">
+          <UserInfoLeft className="left">
             <a href="http://facebook.com">
               <FacebookTwoToneIcon fontSize="large" />
             </a>
@@ -44,8 +53,8 @@ const Profile = () => {
             <a href="http://facebook.com">
               <PinterestIcon fontSize="large" />
             </a>
-          </div>
-          <div className="center">
+          </UserInfoLeft>
+          <UserInfoCenter className="center">
             <span>Jane Doe</span>
             <div className="info">
               <div className="item">
@@ -58,16 +67,16 @@ const Profile = () => {
               </div>
             </div>
             <button>follow</button>
-          </div>
-          <div className="right">
+          </UserInfoCenter>
+          <UserInfoRight className="right">
             <EmailOutlinedIcon />
             <MoreVertIcon />
-          </div>
-        </div>
+          </UserInfoRight>
+        </UserInfo>
         <ShareTest />
         <Posts />
-      </div>
-    </div>
+      </PofileContainer>
+    </ProfileWrapper>
   );
 };
 

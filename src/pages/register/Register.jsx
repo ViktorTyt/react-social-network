@@ -1,63 +1,88 @@
 import "./register.scss";
-import { useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-const URL = "http://localhost:8800/api/";
+
+// import { Form, Label, Button } from "./Register.styled";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Navigate } from "react-router-dom";
+import { useRegistrerMutation } from "redux/authAPI";
+import { useSelector } from "react-redux";
 
 export default function Register() {
-  const username = useRef();
-  const email = useRef();
-  const password = useRef();
-  const passwordAgain = useRef();
-  const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [register] = useRegistrerMutation();
+  const { token } = useSelector((state) => state.users);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (passwordAgain.current.value !== password.current.value) {
-      passwordAgain.current.setCustomValidity("Passwords don't match!");
-    } else {
-      const user = {
-        username: username.current.value,
-        email: email.current.value,
-        password: password.current.value,
-      };
-      try {
-        await axios.post(`${URL}auth/register`, user);
-        navigate("/login");
-      } catch (error) {
-        console.log(error);
-      }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    switch (name) {
+      case "name":
+        setName(value);
+        break;
+      case "email":
+        setEmail(value);
+        break;
+      case "password":
+        setPassword(value);
+        break;
+      default:
+        break;
     }
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const credentials = { name, email, password };
+    register(credentials);
+  };
+
   return (
-    <div className="register">
-      <div className="card">
-        <div className="left">
-          <h1>Viktor Social</h1>
-          <p>Connect with friends and the world around you on Viktorsocial</p>
-          <span>Do you have an account?</span>
-          <Link to="/login">
-            <button>Login</button>
-          </Link>
-        </div>
-        <div className="right">
-          <h1>Register</h1>
-          <form onSubmit={handleSubmit}>
-            <input placeholder="Username" type="text" />
-            <input placeholder="Email" type="email" required ref={email} />
-            <input
-              placeholder="Password"
-              type="password"
-              required
-              minLength={6}
-              ref={password}
-            />
-            <input placeholder="Name" type="text" />
-            <button type="submit">Register</button>
-          </form>
+    <>
+      {token && <Navigate to="/" replace />};
+      <div className="register">
+        <div className="card">
+          <div className="left">
+            <h1>Viktor Social</h1>
+            <p>Connect with friends and the world around you on Viktorsocial</p>
+            <span>Do you have an account?</span>
+            <Link to="/login">
+              <button>Login</button>
+            </Link>
+          </div>
+          <div className="right">
+            <h1>Register</h1>
+            <form onSubmit={handleSubmit}>
+              <input
+                placeholder="Username"
+                type="text"
+                name="name"
+                value={name}
+                onChange={handleInputChange}
+              />
+              <input
+                placeholder="Email"
+                type="email"
+                required
+                name="email"
+                value={email}
+                onChange={handleInputChange}
+              />
+              <input
+                placeholder="Password"
+                name="password"
+                value={password}
+                onChange={handleInputChange}
+                required
+                minLength={6}
+              />
+              <input placeholder="Name" type="text" />
+              <button type="submit">Register</button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 // return (

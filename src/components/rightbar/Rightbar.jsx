@@ -1,11 +1,9 @@
-// import "./rightbar.scss";
-import { Users } from "../../dummyData";
-import Online from "../online/Online";
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+// import { Users } from "../../dummyData";
+// import axios from "axios";
+import { useContext } from "react";
+// import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { Add, Remove } from "@mui/icons-material";
+// import { Add, Remove } from "@mui/icons-material";
 import {
   Item,
   ItemTitle,
@@ -19,7 +17,8 @@ import {
   UserInfo,
   UserTitle,
 } from "./Rightbar.styled";
-const URL = "http://localhost:8800/api/";
+
+// const URL = "http://localhost:8800/api/";
 
 export default function Rightbar() {
   const { user } = useContext(AuthContext);

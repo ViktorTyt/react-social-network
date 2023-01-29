@@ -2,7 +2,9 @@
 
 .sideBar {
   @include themify($themes){
-    display: none;
+    @include mobileOnly {
+      display: none;
+    }
 
     @include tablet{
       flex: 2;

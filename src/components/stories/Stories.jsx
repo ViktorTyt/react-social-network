@@ -31,7 +31,7 @@ const Stories = () => {
   ];
 
   return (
-    <div className="stories">
+    <section className="stories">
       <div className="story">
         <img src={currentUser.coverPicture} alt="" />
         <span>{currentUser.username}</span>
@@ -43,7 +43,7 @@ const Stories = () => {
           <span>{story.name}</span>
         </div>
       ))}
-    </div>
+    </section>
   );
 };
 

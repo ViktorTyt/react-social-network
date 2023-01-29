@@ -5,7 +5,8 @@
   gap: 10px;
   justify-content: space-between;
   height: 50px;
-  margin-bottom: 0;
+  padding: 10px 0;
+  // margin-bottom: 20px;
 
   @include tablet {
     height: 150px;
@@ -15,11 +16,12 @@
   @include desktop {
     height: 250px;
     gap: 10px;
-    margin-bottom: 30px;
   }
 
   .story {
     position: relative;
+    display: flex;
+    overflow: hidden;
     
     @include mobileOnly {
       flex: none;
@@ -29,10 +31,8 @@
     }
 
     @include tablet {
-      display: flex;
       flex: 1;
       border-radius: 10px;
-      overflow: hidden;
     }
 
     img {

@@ -39,7 +39,9 @@
         border: 1px solid themed("border");
   
         input {
-          display: none;
+          @include mobileOnly {
+            display: none;
+          }
 
           @include tablet {
             display: flex;
@@ -61,7 +63,9 @@
     }
   
     .right {
-      display: none;
+      @include mobileOnly {
+        display: none;
+      }
 
       @include tablet {
         display: flex;
@@ -70,7 +74,9 @@
       }
   
       .user {
-        display: none;
+        @include mobileOnly {
+          display: none;
+        }
 
         @include desktop {
           display: flex;

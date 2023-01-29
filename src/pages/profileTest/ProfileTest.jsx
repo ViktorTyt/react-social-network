@@ -9,6 +9,7 @@ import LanguageIcon from "@mui/icons-material/Language";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Posts from "../../components/posts/Posts";
+import ShareTest from "../../components/shareTest/ShareTest";
 
 const Profile = () => {
   return (
@@ -63,6 +64,7 @@ const Profile = () => {
             <MoreVertIcon />
           </div>
         </div>
+        <ShareTest />
         <Posts />
       </div>
     </div>

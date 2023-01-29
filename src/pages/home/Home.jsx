@@ -4,6 +4,8 @@ import Rightbar from "../../components/rightbar/Rightbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Stories from "../../components/stories/Stories";
 import Topbar from "../../components/topbar/Topbar";
+import ShareTest from "../../components/shareTest/ShareTest";
+
 import "./home.scss";
 
 export default function Home() {
@@ -13,6 +15,7 @@ export default function Home() {
       {/* <Topbar /> */}
       <div className="home">
         <Stories />
+        <ShareTest />
         <Posts />
         {/* <Sidebar /> */}
         {/* <Feed /> */}

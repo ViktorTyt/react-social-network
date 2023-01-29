@@ -12,7 +12,7 @@ export default function Rightbar() {
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
-    <div className="rightbar">
+    <section className="rightbar">
       <div className="container">
         <div className="item">
           <span>Suggestion For You</span>
@@ -137,7 +137,7 @@ export default function Rightbar() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

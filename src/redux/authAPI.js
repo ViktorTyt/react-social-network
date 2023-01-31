@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:8800/api",
   prepareHeaders: (headers, { getState }) => {
-    const token = getState().users.token;
+    const token = getState().state.token;
 
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
@@ -14,7 +14,7 @@ export const baseQuery = fetchBaseQuery({
 });
 
 export const authAPI = createApi({
-  reducerPath: "authAPI",
+  reducerPath: "auth",
   baseQuery,
   keepUnusedDataFor: 5,
   tagTypes: ["Auth"],

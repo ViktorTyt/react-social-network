@@ -26,13 +26,18 @@ import {
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 // import { AuthContext } from "../../context/AuthContext";
-import { DarkModeContext } from "../../context/darkModeContext";
+// import { DarkModeContext } from "../../context/darkModeContext";
 import { TestAuthContext } from "../../context/testAuthContext";
+// import { useLoginMutation } from "redux/authAPI.js";
+import { useSelector } from "react-redux";
 
 export default function Topbar() {
   // const { user } = useContext(AuthContext);
+  //  const sts = useSelector((state) => state.users);
+  //   console.log(sts);
+
   const { currentUser } = useContext(TestAuthContext);
-  const { darkMode, toggle } = useContext(DarkModeContext);
+  // const { darkMode, toggle } = useContext(DarkModeContext);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -42,15 +47,15 @@ export default function Topbar() {
   return (
     <Header>
       <NavLeft>
-        <Link style={{ textDecoration: "none" }}>
+        <Link style={{ textDecoration: "none" }} to="/">
           <Logo>Viktorsocial</Logo>
         </Link>
         <HomeOutlined />
-        {darkMode ? (
+        {/* {darkMode ? (
           <WbSunnyOutlined onClick={toggle} />
         ) : (
           <DarkModeOutlined onClick={toggle} />
-        )}
+        )} */}
         <GridViewOutlined />
       </NavLeft>
       <SearchContainer>
@@ -64,13 +69,13 @@ export default function Topbar() {
         <UserInfo>
           <UserImg
             src={
-              currentUser.profilePicture
+              currentUser?.profilePicture
                 ? PF + currentUser.profilePicture
                 : PF + "person/not_found.png"
             }
             alt="1.jpeg"
           />
-          <span>{currentUser.username}</span>
+          <span>{currentUser && currentUser.username}</span>
         </UserInfo>
       </UserContainer>
     </Header>

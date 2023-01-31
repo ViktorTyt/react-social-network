@@ -10,25 +10,26 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-// import filterSlice from "./filterSlice";
 import { postsAPI } from "./postsAPI";
 import { authAPI } from "./authAPI";
-import authSlice from "./authSlice";
+import authReducer from "./authSlice";
+
+console.log(storage);
 
 const persistConfig = {
   key: "token",
   storage,
   whitelist: ["token"],
+  blacklist: [postsAPI.reducerPath, authAPI.reducerPath],
 };
 
-const persistedMyContactsReducer = persistReducer(persistConfig, authSlice);
+const persistedMyContactsReducer = persistReducer(persistConfig, authReducer);
 
 const store = configureStore({
   reducer: {
     [postsAPI.reducerPath]: postsAPI.reducer,
     [authAPI.reducerPath]: authAPI.reducer,
-    // filter: filterSlice,
-    users: persistedMyContactsReducer,
+    state: persistedMyContactsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

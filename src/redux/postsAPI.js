@@ -2,7 +2,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQuery } from "redux/authAPI";
 
 export const postsAPI = createApi({
-  reducerPath: "postsAPI",
+  reducerPath: "posts",
   baseQuery,
   keepUnusedDataFor: 5,
   tagTypes: ["Posts"],

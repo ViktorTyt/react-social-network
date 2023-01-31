@@ -6,13 +6,14 @@ const initialState = {
   name: "",
   email: "",
   token: "",
+  profilePicture: "",
   isLoggedIn: false,
   isRegistredIn: false,
   userContacts: [],
 };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: "state",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -22,16 +23,18 @@ const authSlice = createSlice({
         (state, { payload }) => {
           state.name = payload.user.name;
           state.email = payload.user.email;
-          state.token = payload.token;
+          // state.token = payload.token;
           state.isLoggedIn = true;
         }
       )
       .addMatcher(
         authAPI.endpoints.login.matchFulfilled,
         (state, { payload }) => {
-          state.name = payload.user.name;
-          state.email = payload.user.email;
-          state.token = payload.token;
+          console.log(payload);
+          state.name = payload.data.name;
+          state.email = payload.data.email;
+          state.profilePicture = payload.data.profilePicture;
+          state.token = payload.data.token;
           state.isLoggedIn = true;
         }
       )

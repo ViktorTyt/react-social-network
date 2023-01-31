@@ -20,10 +20,12 @@ import Rightbar from "./components/rightbar/Rightbar";
 import "./style.scss";
 
 import { TestAuthContext } from "./context/testAuthContext";
+import { useSelector } from "react-redux";
 function App() {
   // const { darkMode } = useContext(DarkModeContext);
-  const { currentUser } = useContext(TestAuthContext);
-  console.log("app");
+  // const { currentUser } = useContext(TestAuthContext);
+  const currentUser = useSelector((state) => state.state.token);
+  console.log(currentUser);
 
   const Layout = () => {
     return (

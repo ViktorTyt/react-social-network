@@ -1,4 +1,3 @@
-import "./login.scss";
 import { useRef, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 // import { loginCall } from "../../apiCalls";
@@ -7,6 +6,7 @@ import { useContext } from "react";
 // import { AuthContext } from "../../context/AuthContext";
 import { TestAuthContext } from "../../context/testAuthContext";
 import { useLoginMutation } from "redux/authAPI";
+import { Container, ImageSide, FormSide, LoginWrapper } from "./login.styled";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -60,10 +60,10 @@ export default function Login() {
   // console.log(user);
   return (
     <>
-      {isSuccess && <Navigate to="/" replace />};
-      <div className="login">
-        <div className="card">
-          <div className="left">
+      {isSuccess && <Navigate to="/" replace />}
+      <LoginWrapper className="login">
+        <Container className="card">
+          <ImageSide className="left">
             <h1>Hello Ukraine!</h1>
             <p>Connect with friends and the world around you on Viktorsocial</p>
             <span>Don't you have an account?</span>
@@ -77,9 +77,9 @@ export default function Login() {
               )} */}
               </button>
             </Link>
-          </div>
-          <div className="right">
-            <h1>Login</h1>
+          </ImageSide>
+          <FormSide className="right">
+            <h1>Сторінка входу</h1>
             <form onSubmit={handleSubmit}>
               <input
                 placeholder="Email"
@@ -108,9 +108,9 @@ export default function Login() {
               )} */}
               </button>
             </form>
-          </div>
-        </div>
-      </div>
+          </FormSide>
+        </Container>
+      </LoginWrapper>
     </>
   );
 }

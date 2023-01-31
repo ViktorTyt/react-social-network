@@ -1,18 +1,22 @@
-import "./register.scss";
-
 // import { Form, Label, Button } from "./Register.styled";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useRegistrerMutation } from "redux/authAPI";
 import { useSelector } from "react-redux";
+import {
+  Container,
+  FormSide,
+  ImageSide,
+  RegisterWrapper,
+} from "./register.styled";
 
 export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [register] = useRegistrerMutation();
-  const { token } = useSelector((state) => state.users);
+  const { token } = useSelector((state) => state.state.token);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -39,19 +43,19 @@ export default function Register() {
 
   return (
     <>
-      {token && <Navigate to="/" replace />};
-      <div className="register">
-        <div className="card">
-          <div className="left">
+      {token && <Navigate to="/" replace />}
+      <RegisterWrapper className="register">
+        <Container className="card">
+          <ImageSide className="left">
             <h1>Viktor Social</h1>
             <p>Connect with friends and the world around you on Viktorsocial</p>
             <span>Do you have an account?</span>
             <Link to="/login">
               <button>Login</button>
             </Link>
-          </div>
-          <div className="right">
-            <h1>Register</h1>
+          </ImageSide>
+          <FormSide className="right">
+            <h1>Сторінка реєстрації</h1>
             <form onSubmit={handleSubmit}>
               <input
                 placeholder="Username"
@@ -76,12 +80,11 @@ export default function Register() {
                 required
                 minLength={6}
               />
-              <input placeholder="Name" type="text" />
               <button type="submit">Register</button>
             </form>
-          </div>
-        </div>
-      </div>
+          </FormSide>
+        </Container>
+      </RegisterWrapper>
     </>
   );
 }

@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import "./comments.scss";
 import { TestAuthContext } from "../../context/testAuthContext";
 import { CommentBox, CommentsWrapper, Item } from "./Commets.styled";
 

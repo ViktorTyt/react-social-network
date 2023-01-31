@@ -1,7 +1,5 @@
 import { useContext } from "react";
 import { TestAuthContext } from "../../context/testAuthContext";
-
-// import "./stories.scss";
 import { StoriesWrapper, Story } from "./Stories.styled";
 
 const Stories = () => {

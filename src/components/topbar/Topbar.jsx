@@ -1,4 +1,3 @@
-// import "./topbar.scss";
 import {
   Header,
   Logo,

@@ -1,4 +1,3 @@
-import "./posts.scss";
 import PostTest from "../postTest/PostTest";
 import { PostsList } from "./Posts.styled";
 

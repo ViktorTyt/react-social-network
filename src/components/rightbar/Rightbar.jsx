@@ -1,5 +1,3 @@
-// import { Users } from "../../dummyData";
-// import axios from "axios";
 import { useContext } from "react";
 // import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
@@ -17,8 +15,6 @@ import {
   UserInfo,
   UserTitle,
 } from "./Rightbar.styled";
-
-// const URL = "http://localhost:8800/api/";
 
 export default function Rightbar() {
   const { user } = useContext(AuthContext);

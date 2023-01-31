@@ -21,29 +21,33 @@ import "./style.scss";
 
 import { TestAuthContext } from "./context/testAuthContext";
 import { useSelector } from "react-redux";
+import { useCurrentUserQuery } from "redux/authAPI";
 function App() {
   // const { darkMode } = useContext(DarkModeContext);
   // const { currentUser } = useContext(TestAuthContext);
-  const currentUser = useSelector((state) => state.state.token);
+  // const currentUser = useSelector((state) => state.state.token);
+  const { data: currentUser, isFetching, error } = useCurrentUserQuery();
   console.log(currentUser);
 
   const Layout = () => {
     return (
-      <>
-        <Topbar />
-        <div style={{ display: "flex" }}>
-          <Sidebar />
-          <div style={{ flex: 6 }}>
-            <Outlet />
+      !isFetching && (
+        <>
+          <Topbar />
+          <div style={{ display: "flex" }}>
+            <Sidebar />
+            <div style={{ flex: 6 }}>
+              <Outlet />
+            </div>
+            <Rightbar />
           </div>
-          <Rightbar />
-        </div>
-      </>
+        </>
+      )
     );
   };
 
   const ProtectedRoute = ({ children }) => {
-    if (!currentUser) {
+    if (!currentUser && !isFetching) {
       return <Navigate to="/login" />;
     }
 

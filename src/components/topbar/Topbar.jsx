@@ -32,10 +32,10 @@ import { useSelector } from "react-redux";
 
 export default function Topbar() {
   // const { user } = useContext(AuthContext);
-  //  const sts = useSelector((state) => state.users);
-  //   console.log(sts);
+  const currentUser = useSelector((state) => state.state);
+  console.log(currentUser);
 
-  const { currentUser } = useContext(TestAuthContext);
+  // const { currentUser } = useContext(TestAuthContext);
   // const { darkMode, toggle } = useContext(DarkModeContext);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -69,12 +69,12 @@ export default function Topbar() {
           <UserImg
             src={
               currentUser?.profilePicture
-                ? PF + currentUser.profilePicture
+                ? currentUser.profilePicture
                 : PF + "person/not_found.png"
             }
             alt="1.jpeg"
           />
-          <span>{currentUser && currentUser.username}</span>
+          <span>{currentUser && currentUser.name}</span>
         </UserInfo>
       </UserContainer>
     </Header>

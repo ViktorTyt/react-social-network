@@ -49,8 +49,10 @@ const authSlice = createSlice({
       .addMatcher(
         authAPI.endpoints.currentUser.matchFulfilled,
         (state, { payload }) => {
-          state.name = payload.name;
-          state.email = payload.email;
+          console.log(payload);
+          state.name = payload.data.name;
+          state.email = payload.data.email;
+          state.profilePicture = payload.data.profilePicture;
           state.isLoggedIn = true;
         }
       )
@@ -65,7 +67,7 @@ const authSlice = createSlice({
     // .addMatcher(
     //   postsApi.endpoints.getContacts.matchFulfilled,
     //   (state, { payload }) => {
-    //     state.userContacts = payload;
+    //     state.userContacts = payload.data;
     //   }
     // );
   },

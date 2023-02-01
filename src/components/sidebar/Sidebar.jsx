@@ -27,10 +27,12 @@ import {
   MenuTitle,
   Hr,
 } from "./Sidebar.styled";
+import { useSelector } from "react-redux";
 
 export default function Sidebar() {
   // const { user } = useContext(AuthContext);
-  const { currentUser } = useContext(TestAuthContext);
+  // const { currentUser } = useContext(TestAuthContext);
+  const currentUser = useSelector((state) => state.state);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   console.log(PF);
@@ -45,13 +47,13 @@ export default function Sidebar() {
             <UserImg
               src={
                 currentUser.profilePicture
-                  ? PF + currentUser.profilePicture
+                  ? currentUser.profilePicture
                   : PF + "person/not_found.png"
               }
               alt="1.jpeg"
               className="topbarImg"
             />
-            <UserTitle>{currentUser.username}</UserTitle>
+            <UserTitle>{currentUser.name}</UserTitle>
           </User>
           <Item className="item">
             <ItemImg src={Friends} alt="" />

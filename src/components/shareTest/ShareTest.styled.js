@@ -48,7 +48,7 @@ export const ShareTop = styled.div`
   }
 `;
 
-export const ShareBottom = styled.div`
+export const ShareBottom = styled.form`
   display: flex;
   align-items: center;
   justify-content: space-between;

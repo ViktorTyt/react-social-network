@@ -76,7 +76,7 @@ export const Story = styled.section`
     justify-content: center;
 
     ${device.tablet} {
-      bottom: 40px;
+      bottom: 10px;
       left: 10px;
     }
   }

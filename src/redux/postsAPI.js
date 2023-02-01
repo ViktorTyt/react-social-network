@@ -7,11 +7,11 @@ export const postsAPI = createApi({
   keepUnusedDataFor: 5,
   tagTypes: ["Posts"],
   endpoints: (builder) => ({
-    getContacts: builder.query({
+    getPosts: builder.query({
       query: () => "/posts",
       providesTags: ["Posts"],
     }),
-    addContact: builder.mutation({
+    addPost: builder.mutation({
       query: (data) => ({
         url: "/posts",
         method: "POST",
@@ -19,14 +19,14 @@ export const postsAPI = createApi({
       }),
       invalidatesTags: ["Posts"],
     }),
-    deleteContact: builder.mutation({
+    deletePost: builder.mutation({
       query: (id) => ({
         url: `/posts/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Posts"],
     }),
-    editContact: builder.mutation({
+    editPost: builder.mutation({
       query(data) {
         const { id, ...body } = data;
         return {
@@ -41,8 +41,8 @@ export const postsAPI = createApi({
 });
 
 export const {
-  useGetContactsQuery,
-  useAddContactMutation,
-  useDeleteContactMutation,
-  useEditContactMutation,
+  useGetPostsQuery,
+  useAddPostMutation,
+  useDeletePostMutation,
+  useEditPostMutation,
 } = postsAPI;

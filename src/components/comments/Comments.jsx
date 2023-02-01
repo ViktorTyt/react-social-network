@@ -1,9 +1,11 @@
 import { useContext } from "react";
+import { useSelector } from "react-redux";
 import { TestAuthContext } from "../../context/testAuthContext";
 import { CommentBox, CommentsWrapper, Item } from "./Commets.styled";
 
 const Comments = () => {
-  const { currentUser } = useContext(TestAuthContext);
+  // const { currentUser } = useContext(TestAuthContext);
+  const currentUser = useSelector((state) => state.state);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -29,7 +31,14 @@ const Comments = () => {
   return (
     <CommentsWrapper className="comments">
       <CommentBox className="write">
-        <img src={PF + currentUser.profilePicture} alt="" />
+        <img
+          src={
+            currentUser.profilePicture
+              ? currentUser.profilePicture
+              : PF + "person/not_found.png"
+          }
+          alt=""
+        />
         <input type="text" placeholder="write a comment" />
         <button>Send</button>
       </CommentBox>

@@ -16,37 +16,48 @@ import { useAddPostMutation } from "redux/postsAPI";
 
 const Share = () => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  const [file, setFile] = useState(null);
+  const [postImg, setPostImg] = useState(null);
   const [text, setText] = useState("");
   const currentUser = useSelector((state) => state.state);
   const [createPost, { isLoading: isCreateLoading }] = useAddPostMutation();
+  console.log("isCreateLoading:", isCreateLoading);
+
+  const handleTextChange = (e) => {
+    setText(e.target.value);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newPost = {
-      userId: currentUser._id,
-      desc: text,
-    };
+    // const newPost = {
+    //   userId: currentUser._id,
+    //   desc: text,
+    // };
 
-    if (file) {
+    if (postImg) {
       const data = new FormData();
-      const fileName = Date.now() + file.name;
+      const fileName = Date.now() + postImg.name;
       data.append("name", fileName);
-      data.append("file", file);
-      newPost.img = fileName;
-      console.log(newPost);
-      console.log(data);
+      data.append("postImg", postImg);
+      data.append("userId", currentUser._id);
+      data.append("desc", text);
+      // newPost.postImg = fileName;
+      // console.log(newPost);
+      console.dir(data);
+      for (const value of data.values()) {
+        console.log(value);
+      }
       try {
         await createPost(data);
-        window.location.reload();
+        console.log("after createPost data");
+        // window.location.reload();
       } catch (error) {
         console.log(error);
       }
     }
 
     // try {
-    //   await axios.post(`${URL1}posts`, newPost);
+    //   createPost(newPost);
     // } catch (error) {
     //   console.log(error);
     // }
@@ -68,14 +79,22 @@ const Share = () => {
             type="text"
             name="text"
             value={text}
+            onChange={handleTextChange}
             placeholder={`What's on your mind ${currentUser.name}?`}
           />
         </ShareTop>
         <hr />
-        {file && (
+        {postImg && (
           <div className="imageContainer">
-            <img src={URL.createObjectURL(file)} alt="" className="shareImg" />
-            <Cancel className="shareCancelImg" onClick={() => setFile(null)} />
+            <img
+              src={URL.createObjectURL(postImg)}
+              alt=""
+              className="shareImg"
+            />
+            <Cancel
+              className="shareCancelImg"
+              onClick={() => setPostImg(null)}
+            />
           </div>
         )}
         <ShareBottom className="bottom" onSubmit={handleSubmit}>
@@ -85,7 +104,7 @@ const Share = () => {
               id="file"
               style={{ display: "none" }}
               accept=".png, .jpeg, .jpg"
-              onChange={(e) => setFile(e.target.files[0])}
+              onChange={(e) => setPostImg(e.target.files[0])}
             />
             <label htmlFor="file">
               <div className="item">

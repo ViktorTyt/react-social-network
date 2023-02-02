@@ -19,7 +19,7 @@ console.log(storage);
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["name", "email", "profilePicture", "token"],
+  whitelist: ["_id", "name", "email", "profilePicture", "token"],
   blacklist: [postsAPI.reducerPath, authAPI.reducerPath],
 };
 

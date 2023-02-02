@@ -3,6 +3,7 @@ import { authAPI } from "./authAPI";
 // import { postsApi } from "./postsApi";
 
 const initialState = {
+  _id: "",
   name: "",
   email: "",
   token: "",
@@ -31,6 +32,7 @@ const authSlice = createSlice({
         authAPI.endpoints.login.matchFulfilled,
         (state, { payload }) => {
           console.log(payload);
+          state._id = payload.data._id;
           state.name = payload.data.name;
           state.email = payload.data.email;
           state.profilePicture = payload.data.profilePicture;
@@ -50,6 +52,7 @@ const authSlice = createSlice({
         authAPI.endpoints.currentUser.matchFulfilled,
         (state, { payload }) => {
           console.log(payload);
+          state._id = payload.data._id;
           state.name = payload.data.name;
           state.email = payload.data.email;
           state.profilePicture = payload.data.profilePicture;

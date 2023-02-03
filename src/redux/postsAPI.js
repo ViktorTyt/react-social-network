@@ -26,11 +26,23 @@ export const postsAPI = createApi({
       }),
       invalidatesTags: ["Posts"],
     }),
+
     editPost: builder.mutation({
       query(data) {
         const { id, ...body } = data;
         return {
           url: `/posts/${id}`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+      invalidatesTags: ["Posts"],
+    }),
+    editLikes: builder.mutation({
+      query(data) {
+        const { id, ...body } = data;
+        return {
+          url: `/posts/${id}/like`,
           method: "PATCH",
           body: body,
         };
@@ -45,4 +57,5 @@ export const {
   useAddPostMutation,
   useDeletePostMutation,
   useEditPostMutation,
+  useEditLikesMutation,
 } = postsAPI;

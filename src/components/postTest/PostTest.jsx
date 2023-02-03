@@ -6,7 +6,9 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Link } from "react-router-dom";
 import TimeAgo from "react-timeago";
 import Comments from "../comments/Comments";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { baseQuery } from "redux/authAPI";
 import {
   PostItem,
   PostContainer,
@@ -19,18 +21,38 @@ import {
   PostInfo,
 } from "./PostTest.module";
 import { useGetUserQuery } from "redux/usersAPI";
+import { useEditLikesMutation } from "redux/postsAPI";
+import { useSelector } from "react-redux";
 
 const PostTest = ({ post }) => {
+  const [like, setLike] = useState(post.likes.length);
+  const [isLiked, setIsLiked] = useState(false);
   const [commentOpen, setCommentOpen] = useState(false);
+  const { _id } = useSelector((state) => state.state);
   const { data: user } = useGetUserQuery(post.userId);
   if (user) {
     console.log(user);
   }
 
+  const [ediLikes] = useEditLikesMutation();
+
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  //TEMPORARY
-  const liked = false;
+  // //TEMPORARY
+  // const liked = false;
+  useEffect(() => {
+    setIsLiked(post.likes.includes(_id));
+  }, [post.likes, _id]);
+
+  const likeHandler = async () => {
+    try {
+      await ediLikes({ id: post._id, userId: _id });
+    } catch (err) {
+      console.log(err);
+    }
+    setLike(isLiked ? like - 1 : like + 1);
+    setIsLiked(!isLiked);
+  };
 
   return (
     <PostItem className="post">
@@ -64,9 +86,13 @@ const PostTest = ({ post }) => {
           <img src={post.postImageURL} alt="" />
         </PostContent>
         <PostInfo className="info">
-          <div className="item">
-            {liked ? <FavoriteOutlinedIcon /> : <FavoriteBorderOutlinedIcon />}
-            12 Likes
+          <div className="item" onClick={likeHandler}>
+            {isLiked ? (
+              <FavoriteOutlinedIcon />
+            ) : (
+              <FavoriteBorderOutlinedIcon />
+            )}
+            {like} Likes
           </div>
           <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
             <TextsmsOutlinedIcon />

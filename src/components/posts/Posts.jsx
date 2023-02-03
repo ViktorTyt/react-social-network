@@ -1,9 +1,11 @@
+import { useSelector } from "react-redux";
 import { useGetPostsQuery } from "redux/postsAPI";
 import PostTest from "../postTest/PostTest";
 import { PostsList } from "./Posts.styled";
 
 export default function Posts() {
-  const { data } = useGetPostsQuery("63d97e5c3c3413ba76d92c08");
+  const { _id } = useSelector((state) => state.state);
+  const { data } = useGetPostsQuery(_id);
   console.log(data);
   //TEMPORARY
   // const posts = [

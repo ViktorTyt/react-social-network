@@ -11,12 +11,14 @@ export default function Home() {
   console.log(currentUser);
   console.log("home");
   return (
-    <>
-      <HomeWrapper>
-        <Stories />
-        <ShareTest />
-        <Posts />
-      </HomeWrapper>
-    </>
+    !isFetching && (
+      <>
+        <HomeWrapper>
+          <Stories />
+          <ShareTest />
+          <Posts />
+        </HomeWrapper>
+      </>
+    )
   );
 }

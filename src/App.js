@@ -25,7 +25,7 @@ import { useCurrentUserQuery } from "redux/authAPI";
 function App() {
   // const { darkMode } = useContext(DarkModeContext);
   // const { currentUser } = useContext(TestAuthContext);
-  const { isLoggedIn } = useSelector((state) => state.state);
+  const { token, isLoggedIn } = useSelector((state) => state.state);
   const { data: currentUser, isFetching, error } = useCurrentUserQuery();
   // // console.log(currentUser);
 
@@ -47,7 +47,9 @@ function App() {
   };
 
   const ProtectedRoute = ({ children }) => {
-    !isLoggedIn && <Navigate to="/login" />;
+    if (!token) {
+      return <Navigate to="/login" />;
+    }
 
     return children;
   };

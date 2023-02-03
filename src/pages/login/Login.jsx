@@ -12,6 +12,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, { isSuccess }] = useLoginMutation();
+  console.log(isSuccess);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

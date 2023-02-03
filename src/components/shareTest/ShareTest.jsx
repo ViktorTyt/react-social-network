@@ -50,7 +50,7 @@ const Share = () => {
       try {
         await createPost(data);
         console.log("after createPost data");
-        // window.location.reload();
+        window.location.reload();
       } catch (error) {
         console.log(error);
       }

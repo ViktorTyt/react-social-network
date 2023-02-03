@@ -8,7 +8,7 @@ export const postsAPI = createApi({
   tagTypes: ["Posts"],
   endpoints: (builder) => ({
     getPosts: builder.query({
-      query: () => "/posts",
+      query: (userId) => `/posts/timeline/${userId}`,
       providesTags: ["Posts"],
     }),
     addPost: builder.mutation({

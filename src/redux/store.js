@@ -12,6 +12,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import { postsAPI } from "./postsAPI";
 import { authAPI } from "./authAPI";
+import { usersAPI } from "./usersAPI";
 import authReducer from "./authSlice";
 
 console.log(storage);
@@ -20,15 +21,16 @@ const persistConfig = {
   key: "root",
   storage,
   whitelist: ["_id", "name", "email", "profilePicture", "token"],
-  blacklist: [postsAPI.reducerPath, authAPI.reducerPath],
+  blacklist: [postsAPI.reducerPath, authAPI.reducerPath, usersAPI.reducerPath],
 };
 
 const persistedMyContactsReducer = persistReducer(persistConfig, authReducer);
 
 const store = configureStore({
   reducer: {
-    [postsAPI.reducerPath]: postsAPI.reducer,
     [authAPI.reducerPath]: authAPI.reducer,
+    [postsAPI.reducerPath]: postsAPI.reducer,
+    [usersAPI.reducerPath]: usersAPI.reducer,
     state: persistedMyContactsReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -37,8 +39,9 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     })
+      .concat(authAPI.middleware)
       .concat(postsAPI.middleware)
-      .concat(authAPI.middleware),
+      .concat(usersAPI.middleware),
 });
 
 export const persistor = persistStore(store);

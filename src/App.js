@@ -25,13 +25,13 @@ import { useCurrentUserQuery } from "redux/authAPI";
 function App() {
   // const { darkMode } = useContext(DarkModeContext);
   // const { currentUser } = useContext(TestAuthContext);
-  // const currentUser = useSelector((state) => state.state.token);
+  const { isLoggedIn } = useSelector((state) => state.state);
   const { data: currentUser, isFetching, error } = useCurrentUserQuery();
-  console.log(currentUser);
+  // // console.log(currentUser);
 
   const Layout = () => {
     return (
-      !isFetching && (
+      isLoggedIn && (
         <>
           <Topbar />
           <div style={{ display: "flex" }}>
@@ -47,9 +47,7 @@ function App() {
   };
 
   const ProtectedRoute = ({ children }) => {
-    if (!currentUser && !isFetching) {
-      return <Navigate to="/login" />;
-    }
+    !isLoggedIn && <Navigate to="/login" />;
 
     return children;
   };

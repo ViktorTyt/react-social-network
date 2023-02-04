@@ -1,3 +1,4 @@
+import { Loader } from "components/loader/Loader";
 import { useSelector } from "react-redux";
 import { useGetPostsQuery } from "redux/postsAPI";
 import PostTest from "../postTest/PostTest";
@@ -5,7 +6,7 @@ import { PostsList } from "./Posts.styled";
 
 export default function Posts() {
   const { _id } = useSelector((state) => state.state);
-  const { data } = useGetPostsQuery(_id);
+  const { data, isFetching } = useGetPostsQuery(_id);
   console.log(data);
   //TEMPORARY
   // const posts = [
@@ -26,7 +27,9 @@ export default function Posts() {
   //   },
   // ];
 
-  return (
+  return isFetching ? (
+    <Loader />
+  ) : (
     <PostsList className="posts">
       {data?.map((post) => (
         <PostTest post={post} key={post._id} />

@@ -5,7 +5,7 @@ export const postsAPI = createApi({
   reducerPath: "posts",
   baseQuery,
   keepUnusedDataFor: 5,
-  tagTypes: ["Posts"],
+  tagTypes: ["Posts", "Comments"],
   endpoints: (builder) => ({
     getPosts: builder.query({
       query: (userId) => `/posts/timeline/${userId}`,
@@ -49,6 +49,22 @@ export const postsAPI = createApi({
       },
       invalidatesTags: ["Posts"],
     }),
+    getPostComments: builder.query({
+      query: (id) => `/posts/${id}/comments`,
+      providesTags: ["Comments"],
+    }),
+    getCommentById: builder.query({
+      query: (id) => `/posts/comments/${id}`,
+      invalidatesTags: ["Comments"],
+    }),
+    addComment: builder.mutation({
+      query: (data) => ({
+        url: "/posts/comments",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Comments"],
+    }),
   }),
 });
 
@@ -58,4 +74,7 @@ export const {
   useDeletePostMutation,
   useEditPostMutation,
   useEditLikesMutation,
+  useGetPostCommentsQuery,
+  useGetCommentByIdQuery,
+  useAddCommentMutation,
 } = postsAPI;

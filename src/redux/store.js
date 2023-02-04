@@ -18,9 +18,9 @@ import authReducer from "./authSlice";
 console.log(storage);
 
 const persistConfig = {
-  key: "root",
+  key: "token",
   storage,
-  whitelist: ["_id", "name", "email", "profilePicture", "token"],
+  whitelist: ["token"],
   blacklist: [postsAPI.reducerPath, authAPI.reducerPath, usersAPI.reducerPath],
 };
 

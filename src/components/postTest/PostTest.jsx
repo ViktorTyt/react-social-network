@@ -72,7 +72,7 @@ const PostTest = ({ post }) => {
                 to={`/profile/${post.userId}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <UserInfoName className="name">{post.name}</UserInfoName>
+                <UserInfoName className="name">{user?.data.name}</UserInfoName>
               </Link>
               <UserInfoDate className="date">
                 <TimeAgo date={post.createdAt} />
@@ -103,7 +103,7 @@ const PostTest = ({ post }) => {
             Share
           </div>
         </PostInfo>
-        {commentOpen && <Comments />}
+        {commentOpen && <Comments postId={post._id} />}
       </PostContainer>
     </PostItem>
   );

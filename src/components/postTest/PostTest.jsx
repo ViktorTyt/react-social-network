@@ -25,33 +25,33 @@ import { useEditLikesMutation } from "redux/postsAPI";
 import { useSelector } from "react-redux";
 
 const PostTest = ({ post }) => {
-  const [like, setLike] = useState(post.likes.length);
-  const [isLiked, setIsLiked] = useState(false);
-  const [commentOpen, setCommentOpen] = useState(false);
   const { _id } = useSelector((state) => state.state);
+  const [like, setLike] = useState(post.likes.length);
+  const [isLiked, setIsLiked] = useState(post.likes.includes(_id));
+  const [commentOpen, setCommentOpen] = useState(false);
   const { data: user } = useGetUserQuery(post.userId);
-  if (user) {
-    console.log(user);
-  }
 
-  const [ediLikes] = useEditLikesMutation();
+  const [ediLikes, { isLoading: isUpdating }] = useEditLikesMutation();
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  // //TEMPORARY
+  //TEMPORARY
   // const liked = false;
-  useEffect(() => {
-    setIsLiked(post.likes.includes(_id));
-  }, [post.likes, _id]);
+  // useEffect(() => {
+  //   setIsLiked(post.likes.includes(_id));
+  // }, [post.likes, _id]);
 
   const likeHandler = async () => {
     try {
-      await ediLikes({ id: post._id, userId: _id });
+      await ediLikes({ id: post._id, userId: _id }).unwrap();
+
+      // window.location.reload();
     } catch (err) {
       console.log(err);
+    } finally {
+      setLike(isLiked ? like - 1 : like + 1);
+      setIsLiked(!isLiked);
     }
-    setLike(isLiked ? like - 1 : like + 1);
-    setIsLiked(!isLiked);
   };
 
   return (
@@ -96,7 +96,7 @@ const PostTest = ({ post }) => {
           </div>
           <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
             <TextsmsOutlinedIcon />
-            12 Comments
+            {post.comments.length} Comments
           </div>
           <div className="item">
             <ShareOutlinedIcon />

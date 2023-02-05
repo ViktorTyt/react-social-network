@@ -26,12 +26,13 @@ function App() {
   // const { darkMode } = useContext(DarkModeContext);
   // const { currentUser } = useContext(TestAuthContext);
   const { token, isLoggedIn } = useSelector((state) => state.state);
-  const { data: currentUser, isFetching, error } = useCurrentUserQuery();
   // // console.log(currentUser);
 
   const Layout = () => {
+    const { data: currentUser, isFetching, error } = useCurrentUserQuery();
     return (
-      isLoggedIn && (
+      isLoggedIn &&
+      currentUser && (
         <>
           <Topbar />
           <div style={{ display: "flex" }}>

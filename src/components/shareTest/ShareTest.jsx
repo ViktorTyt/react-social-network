@@ -29,38 +29,32 @@ const Share = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // const newPost = {
-    //   userId: currentUser._id,
-    //   desc: text,
-    // };
-
-    if (postImg) {
+    if (postImg || text) {
       const data = new FormData();
-      const fileName = Date.now() + postImg.name;
-      data.append("name", fileName);
-      data.append("postImg", postImg);
+
+      if (postImg) {
+        const fileName = Date.now() + postImg.name;
+        data.append("name", fileName);
+        data.append("postImg", postImg);
+      }
+
       data.append("userId", currentUser._id);
       data.append("desc", text);
-      // newPost.postImg = fileName;
-      // console.log(newPost);
-      console.dir(data);
-      for (const value of data.values()) {
-        console.log(value);
-      }
+      // console.dir(data);
+      // for (const value of data.values()) {
+      //   console.log(value);
+      // }
       try {
         await createPost(data);
         console.log("after createPost data");
-        window.location.reload();
+        // window.location.reload();
       } catch (error) {
         console.log(error);
+      } finally {
+        setText("");
+        setPostImg(null);
       }
     }
-
-    // try {
-    //   createPost(newPost);
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   return (

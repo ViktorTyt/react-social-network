@@ -6,8 +6,7 @@ import { PostsList } from "./Posts.styled";
 
 export default function Posts() {
   const { _id } = useSelector((state) => state.state);
-  const { data, isFetching } = useGetPostsQuery(_id);
-  console.log(data);
+  const { data, isLoading, isFetching } = useGetPostsQuery(_id);
   //TEMPORARY
   // const posts = [
   //   {
@@ -27,7 +26,7 @@ export default function Posts() {
   //   },
   // ];
 
-  return isFetching ? (
+  return isLoading ? (
     <Loader />
   ) : (
     <PostsList className="posts">

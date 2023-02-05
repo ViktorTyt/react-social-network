@@ -12,7 +12,7 @@ const Comments = ({ postId }) => {
 
   const currentUser = useSelector((state) => state.state);
 
-  const { data, isFetching } = useGetPostCommentsQuery(postId);
+  const { data, isLoading, isFetching } = useGetPostCommentsQuery(postId);
   console.log(data);
 
   const [addComment, { isLoading: isUpdating }] = useAddCommentMutation();
@@ -48,7 +48,7 @@ const Comments = ({ postId }) => {
   //       "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
   //   },
   // ];
-  return isFetching || isUpdating ? (
+  return isLoading ? (
     <Loader />
   ) : (
     <CommentsWrapper className="comments">
@@ -70,9 +70,10 @@ const Comments = ({ postId }) => {
         <button onClick={hadleSubmit}>Send</button>
       </CommentBox>
       <ul>
-        {data?.data.comments?.map((comment) => (
-          <Comment comment={comment} key={comment._id} />
-        ))}
+        {!isUpdating &&
+          data?.data.comments?.map((comment) => (
+            <Comment comment={comment} key={comment._id} />
+          ))}
       </ul>
     </CommentsWrapper>
   );

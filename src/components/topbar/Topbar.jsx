@@ -29,6 +29,7 @@ import { useContext } from "react";
 import { TestAuthContext } from "../../context/testAuthContext";
 // import { useLoginMutation } from "redux/authAPI.js";
 import { useSelector } from "react-redux";
+import ProfileMenu from "components/profileMenu/ProfileMenu";
 
 export default function Topbar() {
   // const { user } = useContext(AuthContext);
@@ -74,7 +75,8 @@ export default function Topbar() {
             }
             alt="1.jpeg"
           />
-          <span>{currentUser && currentUser.name}</span>
+          <ProfileMenu name={currentUser && currentUser.name} />
+          {/* <span>{currentUser && currentUser.name}</span> */}
         </UserInfo>
       </UserContainer>
     </Header>

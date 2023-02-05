@@ -8,6 +8,7 @@ const initialState = {
   email: "",
   token: "",
   profilePicture: "",
+  coverPicture: "",
   isLoggedIn: false,
   isRegistredIn: false,
   userContacts: [],
@@ -56,6 +57,7 @@ const authSlice = createSlice({
           state.name = payload.data.name;
           state.email = payload.data.email;
           state.profilePicture = payload.data.profilePicture;
+          state.coverPicture = payload.data.coverPicture;
           state.isLoggedIn = true;
         }
       )

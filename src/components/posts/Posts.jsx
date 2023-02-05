@@ -1,12 +1,21 @@
 import { Loader } from "components/loader/Loader";
 import { useSelector } from "react-redux";
-import { useGetPostsQuery } from "redux/postsAPI";
+import { useAllPostByUserQuery, useGetPostsQuery } from "redux/postsAPI";
 import PostTest from "../postTest/PostTest";
 import { PostsList } from "./Posts.styled";
 
-export default function Posts() {
+export default function Posts({ profile }) {
   const { _id } = useSelector((state) => state.state);
-  const { data, isLoading, isFetching } = useGetPostsQuery(_id);
+
+  const { data: timelinePosts, isLoading: isLoadingTimline } = useGetPostsQuery(
+    _id,
+    { skip: profile }
+  );
+  const { data: allPostByUser, isLoading: isLoadingUsers } =
+    useAllPostByUserQuery(profile, { skip: !profile });
+
+  console.log(profile);
+  console.log("posts");
   //TEMPORARY
   // const posts = [
   //   {
@@ -25,12 +34,13 @@ export default function Posts() {
   //     desc: "Tenetur iste voluptates dolorem rem commodi voluptate pariatur, voluptatum, laboriosam consequatur enim nostrum cumque! Maiores a nam non adipisci minima modi tempore.",
   //   },
   // ];
+  const renderPosts = profile ? allPostByUser : timelinePosts;
 
-  return isLoading ? (
+  return isLoadingTimline || isLoadingUsers ? (
     <Loader />
   ) : (
     <PostsList className="posts">
-      {data?.map((post) => (
+      {renderPosts?.map((post) => (
         <PostTest post={post} key={post._id} />
       ))}
     </PostsList>

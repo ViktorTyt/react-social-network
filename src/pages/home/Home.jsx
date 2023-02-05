@@ -9,7 +9,7 @@ import { useCurrentUserQuery } from "redux/authAPI";
 export default function Home() {
   // const { data: currentUser, isFetching, error } = useCurrentUserQuery();
   // console.log(currentUser);
-  // console.log("home");
+  console.log("home");
   return (
     <>
       <HomeWrapper>

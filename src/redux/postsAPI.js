@@ -21,6 +21,20 @@ export const postsAPI = createApi({
           : // an error occurred, but we still want to refetch this query when `{ type: 'Posts', id: 'LIST' }` is invalidated
             [{ type: "Posts", id: "LIST" }],
     }),
+    allPostByUser: builder.query({
+      query: (username) => `/posts/profile/${username}`,
+      providesTags: (result) =>
+        // result.map(({ _id }) => console.log(_id)),
+        // is result available?
+        result
+          ? // successful query
+            [
+              ...result.map(({ _id }) => ({ type: "Posts", _id })),
+              { type: "Posts", id: "LIST" },
+            ]
+          : // an error occurred, but we still want to refetch this query when `{ type: 'Posts', id: 'LIST' }` is invalidated
+            [{ type: "Posts", id: "LIST" }],
+    }),
     addPost: builder.mutation({
       query: (data) => ({
         url: "/posts",
@@ -99,4 +113,5 @@ export const {
   useGetPostCommentsQuery,
   useGetCommentByIdQuery,
   useAddCommentMutation,
+  useAllPostByUserQuery,
 } = postsAPI;

@@ -67,14 +67,16 @@ export default function Topbar() {
         <EmailOutlined />
         <NotificationsOutlined />
         <UserInfo>
-          <UserImg
-            src={
-              currentUser?.profilePicture
-                ? currentUser.profilePicture
-                : PF + "person/not_found.png"
-            }
-            alt="1.jpeg"
-          />
+          <Link to={`/profile/${currentUser.name}`}>
+            <UserImg
+              src={
+                currentUser?.profilePicture
+                  ? currentUser.profilePicture
+                  : PF + "person/not_found.png"
+              }
+              alt="1.jpeg"
+            />
+          </Link>
           <ProfileMenu name={currentUser && currentUser.name} />
           {/* <span>{currentUser && currentUser.name}</span> */}
         </UserInfo>

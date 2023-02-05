@@ -18,21 +18,33 @@ import {
   UserInfoLeft,
   UserInfoCenter,
   UserInfoRight,
+  CoverPicture,
+  ProfilePicture,
 } from "./ProfileTest.styled";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
+  const currentUser = useSelector((state) => state.state);
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   return (
     <ProfileWrapper className="profile">
       <Images className="images">
-        <img
-          src="https://images.pexels.com/photos/13440765/pexels-photo-13440765.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-          alt=""
-          className="cover"
+        <CoverPicture
+          src={
+            currentUser?.coverPicture
+              ? currentUser.coverPicture
+              : PF + "post/3.jpeg"
+          }
+          alt="1.jpeg"
         />
-        <img
-          src="https://images.pexels.com/photos/14028501/pexels-photo-14028501.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
-          alt=""
-          className="profilePic"
+        <ProfilePicture
+          src={
+            currentUser?.profilePicture
+              ? currentUser.profilePicture
+              : PF + "person/not_found.png"
+          }
+          alt="1.jpeg"
         />
       </Images>
       <PofileContainer className="profileContainer">
@@ -55,7 +67,7 @@ const Profile = () => {
             </a>
           </UserInfoLeft>
           <UserInfoCenter className="center">
-            <span>Jane Doe</span>
+            <span>{currentUser.name}</span>
             <div className="info">
               <div className="item">
                 <PlaceIcon />
@@ -74,7 +86,7 @@ const Profile = () => {
           </UserInfoRight>
         </UserInfo>
         <ShareTest />
-        <Posts />
+        <Posts profile={currentUser.name} />
       </PofileContainer>
     </ProfileWrapper>
   );

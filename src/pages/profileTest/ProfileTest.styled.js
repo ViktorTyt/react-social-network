@@ -9,24 +9,24 @@ export const Images = styled.div`
   width: 100%;
   height: 300px;
   position: relative;
+`;
 
-  .cover {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+export const CoverPicture = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
 
-  .profilePic {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;
-    top: 200px;
-  }
+export const ProfilePicture = styled.img`
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 200px;
 `;
 
 export const PofileContainer = styled.div`
@@ -68,14 +68,14 @@ export const UserInfo = styled.div`
 `;
 
 export const UserInfoLeft = styled.div`
-  flex: 1;
+  flex: 0.5;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 
-  ${device.desktop} {
+  /* ${device.desktop} {
     flex-wrap: nowrap;
-  }
+  } */
 
   a {
     color: ${theme.colors.lightMode.textColorSoft};
@@ -83,14 +83,14 @@ export const UserInfoLeft = styled.div`
 `;
 
 export const UserInfoCenter = styled.div`
-  flex: 1;
+  flex: 1.5;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
 
   span {
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 500;
   }
 
@@ -122,7 +122,7 @@ export const UserInfoCenter = styled.div`
 `;
 
 export const UserInfoRight = styled.div`
-  flex: 1;
+  flex: 0.5;
   display: flex;
   align-items: center;
   justify-content: flex-end;

@@ -63,6 +63,7 @@ const authSlice = createSlice({
         authAPI.endpoints.logout.matchFulfilled,
         (state, { payload }) => {
           state.token = "";
+          state._id = "";
           state.isLoggedIn = false;
           state.userContacts = null;
         }

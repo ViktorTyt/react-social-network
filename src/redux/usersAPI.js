@@ -16,12 +16,21 @@ export const usersAPI = createApi({
         const { id, ...body } = data;
         return {
           url: `/users/${id}`,
+          method: "PUT",
+          body,
+        };
+      },
+    }),
+    updateUserCover: builder.mutation({
+      query(body) {
+        return {
+          url: `/users/upload`,
           method: "PATCH",
-          body: body,
+          body,
         };
       },
     }),
   }),
 });
 
-export const { useGetUserQuery } = usersAPI;
+export const { useGetUserQuery, useUpdateUserCoverMutation } = usersAPI;

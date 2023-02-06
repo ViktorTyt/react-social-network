@@ -29,6 +29,40 @@ export const ProfilePicture = styled.img`
   top: 200px;
 `;
 
+export const EditCoverBox = styled.div`
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+
+  button {
+    display: flex;
+    align-items: center;
+    height: 24px;
+    gap: 2px;
+    font-size: 12px;
+    padding: 4px 6px;
+    border-radius: 6px;
+    background-color: ${theme.colors.lightMode.bg};
+
+    &:hover {
+      background-color: ${theme.colors.lightMode.bgSoft};
+    }
+
+    &:focus {
+      background-color: ${theme.colors.lightMode.bgSoft};
+    }
+
+    span {
+      ${device.mobile} {
+        display: none;
+      }
+
+      ${device.desktop} {
+        display: flex;
+      }
+    }
+  }
+`;
 export const PofileContainer = styled.div`
   padding: 10px;
 

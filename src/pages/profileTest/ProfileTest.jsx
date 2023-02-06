@@ -13,6 +13,7 @@ import ShareTest from "../../components/shareTest/ShareTest";
 import {
   ProfileWrapper,
   Images,
+  EditCoverBox,
   PofileContainer,
   UserInfo,
   UserInfoLeft,
@@ -22,6 +23,7 @@ import {
   ProfilePicture,
 } from "./ProfileTest.styled";
 import { useSelector } from "react-redux";
+import CoverMenu from "components/coverMenu/CoverMenu";
 
 const Profile = () => {
   const currentUser = useSelector((state) => state.state);
@@ -46,7 +48,11 @@ const Profile = () => {
           }
           alt="1.jpeg"
         />
+        <EditCoverBox>
+          <CoverMenu />
+        </EditCoverBox>
       </Images>
+
       <PofileContainer className="profileContainer">
         <UserInfo className="uInfo">
           <UserInfoLeft className="left">

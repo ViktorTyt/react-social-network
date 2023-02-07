@@ -31,27 +31,9 @@ const Profile = () => {
 
   return (
     <ProfileWrapper className="profile">
-      <Images className="images">
-        <CoverPicture
-          src={
-            currentUser?.coverPicture
-              ? currentUser.coverPicture
-              : PF + "post/3.jpeg"
-          }
-          alt="1.jpeg"
-        />
-        <ProfilePicture
-          src={
-            currentUser?.profilePicture
-              ? currentUser.profilePicture
-              : PF + "person/not_found.png"
-          }
-          alt="1.jpeg"
-        />
-        <EditCoverBox>
-          <CoverMenu />
-        </EditCoverBox>
-      </Images>
+      {/* <EditCoverBox> */}
+      <CoverMenu />
+      {/* </EditCoverBox> */}
 
       <PofileContainer className="profileContainer">
         <UserInfo className="uInfo">

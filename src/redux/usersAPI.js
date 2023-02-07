@@ -10,6 +10,7 @@ export const usersAPI = createApi({
       query: (id) => ({
         url: `/users/${id}`,
       }),
+      providesTags: ["Users"],
     }),
     updateUser: builder.mutation({
       query(data) {
@@ -20,17 +21,33 @@ export const usersAPI = createApi({
           body,
         };
       },
+      invalidatesTags: ["Users"],
     }),
     updateUserCover: builder.mutation({
-      query(body) {
+      query(data) {
         return {
-          url: `/users/upload`,
+          url: `/users/cover`,
           method: "PATCH",
-          body,
+          body: data,
         };
       },
+      invalidatesTags: ["Users"],
+    }),
+    updateUserAvatar: builder.mutation({
+      query(data) {
+        return {
+          url: `/users/avatar`,
+          method: "PATCH",
+          body: data,
+        };
+      },
+      invalidatesTags: ["Users"],
     }),
   }),
 });
 
-export const { useGetUserQuery, useUpdateUserCoverMutation } = usersAPI;
+export const {
+  useGetUserQuery,
+  useUpdateUserCoverMutation,
+  useUpdateUserAvatarMutation,
+} = usersAPI;

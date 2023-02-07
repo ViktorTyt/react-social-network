@@ -5,64 +5,64 @@ export const ProfileWrapper = styled.div`
   ${theme.colors.lightMode.bgSoft}
 `;
 
-export const Images = styled.div`
-  width: 100%;
-  height: 300px;
-  position: relative;
-`;
+// export const Images = styled.div`
+//   width: 100%;
+//   height: 300px;
+//   position: relative;
+// `;
 
-export const CoverPicture = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
+// export const CoverPicture = styled.img`
+//   width: 100%;
+//   height: 100%;
+//   object-fit: cover;
+// `;
 
-export const ProfilePicture = styled.img`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  object-fit: cover;
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: auto;
-  top: 200px;
-`;
+// export const ProfilePicture = styled.img`
+//   width: 200px;
+//   height: 200px;
+//   border-radius: 50%;
+//   object-fit: cover;
+//   position: absolute;
+//   left: 0;
+//   right: 0;
+//   margin: auto;
+//   top: 200px;
+// `;
 
-export const EditCoverBox = styled.div`
-  position: absolute;
-  right: 10px;
-  bottom: 8px;
+// export const EditCoverBox = styled.div`
+//   position: absolute;
+//   right: 10px;
+//   bottom: 8px;
 
-  button {
-    display: flex;
-    align-items: center;
-    height: 24px;
-    gap: 2px;
-    font-size: 12px;
-    padding: 4px 6px;
-    border-radius: 6px;
-    background-color: ${theme.colors.lightMode.bg};
+//   button {
+//     display: flex;
+//     align-items: center;
+//     height: 24px;
+//     gap: 2px;
+//     font-size: 12px;
+//     padding: 4px 6px;
+//     border-radius: 6px;
+//     background-color: ${theme.colors.lightMode.bg};
 
-    &:hover {
-      background-color: ${theme.colors.lightMode.bgSoft};
-    }
+//     &:hover {
+//       background-color: ${theme.colors.lightMode.bgSoft};
+//     }
 
-    &:focus {
-      background-color: ${theme.colors.lightMode.bgSoft};
-    }
+//     &:focus {
+//       background-color: ${theme.colors.lightMode.bgSoft};
+//     }
 
-    span {
-      ${device.mobile} {
-        display: none;
-      }
+//     span {
+//       ${device.mobile} {
+//         display: none;
+//       }
 
-      ${device.desktop} {
-        display: flex;
-      }
-    }
-  }
-`;
+//       ${device.desktop} {
+//         display: flex;
+//       }
+//     }
+//   }
+// `;
 export const PofileContainer = styled.div`
   padding: 10px;
 

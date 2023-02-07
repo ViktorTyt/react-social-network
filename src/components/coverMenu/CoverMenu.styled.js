@@ -23,7 +23,7 @@ export const ProfilePictureBox = styled.div`
   width: 200px;
   height: 200px;
 
-  button {
+  > button {
     position: absolute;
     left: 150px;
     bottom: 15px;
@@ -47,8 +47,11 @@ export const ProfilePicture = styled.img`
 
 export const EditProfilePictureContainer = styled.div`
   position: absolute;
+  top: 185px;
   width: 150px;
+  /* height: 50px; */
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 20px;
   -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
@@ -57,36 +60,14 @@ export const EditProfilePictureContainer = styled.div`
   padding: 12px;
   background-color: ${theme.colors.lightMode.bg};
   border-radius: 8px;
+  border: 1px solid gray;
 `;
 
 export const MenuWrapper = styled.div`
   display: flex;
   flex-direction: column;
-`;
 
-export const ModalContainer = styled.div`
-  position: absolute;
-  top: 24px;
-  right: 0;
-  height: 100px;
-  width: 150px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-  -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-  box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-  padding: 12px;
-  background-color: ${theme.colors.lightMode.bg};
-  border-radius: 8px;
-`;
-
-export const EditCoverBox = styled.div`
-  position: absolute;
-  right: 10px;
-  bottom: 8px;
-
-  button {
+  > button {
     display: flex;
     align-items: center;
     height: 24px;
@@ -114,6 +95,32 @@ export const EditCoverBox = styled.div`
       }
     }
   }
+`;
+
+export const ModalContainer = styled.div`
+  position: absolute;
+  top: 24px;
+  right: 0;
+  height: 100px;
+  width: 150px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+  -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+  box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+  padding: 12px;
+  background-color: ${theme.colors.lightMode.bg};
+  border-radius: 8px;
+  border: 1px solid gray;
+  font-size: 16px;
+`;
+
+export const EditCoverBox = styled.div`
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
 `;
 
 export const CancelCover = styled.button`

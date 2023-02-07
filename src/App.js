@@ -22,6 +22,7 @@ import "./style.scss";
 import { TestAuthContext } from "./context/testAuthContext";
 import { useSelector } from "react-redux";
 import { useCurrentUserQuery } from "redux/authAPI";
+import { useGetUserQuery } from "redux/usersAPI";
 function App() {
   // const { darkMode } = useContext(DarkModeContext);
   // const { currentUser } = useContext(TestAuthContext);
@@ -30,6 +31,7 @@ function App() {
 
   const Layout = () => {
     const { data: currentUser, isFetching, error } = useCurrentUserQuery();
+
     return (
       isLoggedIn &&
       currentUser && (

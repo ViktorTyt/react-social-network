@@ -13,7 +13,6 @@ import Courses from "../../assets/12.png";
 import Fund from "../../assets/13.png";
 // import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
-import { TestAuthContext } from "../../context/testAuthContext";
 import {
   Menu,
   Item,
@@ -30,8 +29,6 @@ import {
 import { useSelector } from "react-redux";
 
 export default function Sidebar() {
-  // const { user } = useContext(AuthContext);
-  // const { currentUser } = useContext(TestAuthContext);
   const currentUser = useSelector((state) => state.state);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -46,14 +43,14 @@ export default function Sidebar() {
           <User className="user">
             <UserImg
               src={
-                currentUser.profilePicture
-                  ? currentUser.profilePicture
+                currentUser?.profilePicture
+                  ? currentUser?.profilePicture
                   : PF + "person/not_found.png"
               }
               alt="1.jpeg"
               className="topbarImg"
             />
-            <UserTitle>{currentUser.name}</UserTitle>
+            <UserTitle>{currentUser?.name}</UserTitle>
           </User>
           <Item className="item">
             <ItemImg src={Friends} alt="" />

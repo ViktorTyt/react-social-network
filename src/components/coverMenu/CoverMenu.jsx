@@ -18,11 +18,13 @@ import {
 import { useSelector } from "react-redux";
 import { Cancel } from "@mui/icons-material";
 import userImageHandler from "helpers/userImageHandler";
+import { useCurrentUserQuery } from "redux/authAPI";
 
 export default function CoverMenu() {
   const currentUser = useSelector((state) => state.state);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
+  const [toFetch, setToFetch] = useState(true);
   const [cover, setCover] = useState(null);
   const [avatar, setAvatar] = useState(null);
 
@@ -31,6 +33,7 @@ export default function CoverMenu() {
 
   const [updateCover] = useUpdateUserCoverMutation();
   const [updateAvatar] = useUpdateUserAvatarMutation();
+  const { data, refetch } = useCurrentUserQuery(null, { skip: toFetch });
 
   const openCover = Boolean(anchorCover);
   const openAvatar = Boolean(anchorAvatar);
@@ -54,16 +57,33 @@ export default function CoverMenu() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (cover) {
-      userImageHandler("cover", cover, updateCover, setCover, currentUser._id);
-    } else {
-      userImageHandler(
-        "avatar",
-        avatar,
-        updateAvatar,
-        setAvatar,
-        currentUser._id
-      );
+    try {
+      if (cover) {
+        await userImageHandler(
+          "cover",
+          cover,
+          updateCover,
+          setCover,
+          currentUser._id
+        );
+        window.location.reload();
+        // setToFetch(!toFetch);
+      } else {
+        await userImageHandler(
+          "avatar",
+          avatar,
+          updateAvatar,
+          setAvatar,
+          currentUser._id
+        );
+        window.location.reload();
+
+        // setToFetch(!toFetch);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      handleClose();
     }
   };
 
@@ -91,36 +111,37 @@ export default function CoverMenu() {
           alt="profilePicture"
         />
 
-        <button id="avatar-button" onClick={handleClick}>
+        <button id="avatar-button" onClick={handleClick} disabled={openCover}>
           <CameraAltIcon />
         </button>
+
+        {anchorAvatar && (
+          <EditProfilePictureContainer
+            id="basic-menu"
+            open={openAvatar}
+            onClose={handleClose}
+          >
+            <form className="bottom" onSubmit={handleSubmit}>
+              <label htmlFor="file">
+                {!avatar && "Завантажити"}
+                <input
+                  type="file"
+                  id="file"
+                  style={{ display: "none" }}
+                  accept=".png, .jpeg, .jpg"
+                  onChange={(e) => setAvatar(e.target.files[0])}
+                />
+              </label>
+              {avatar && <button type="submit">Підтвердити</button>}
+            </form>
+            {!avatar && <button onClick={handleClose}>Видалити</button>}
+            <button onClick={handleClose}>Назад</button>
+          </EditProfilePictureContainer>
+        )}
       </ProfilePictureBox>
-      {anchorAvatar && (
-        <EditProfilePictureContainer
-          id="basic-menu"
-          open={openAvatar}
-          onClose={handleClose}
-        >
-          <form className="bottom" onSubmit={handleSubmit}>
-            <label htmlFor="file">
-              Завантажити
-              <input
-                type="file"
-                id="file"
-                style={{ display: "none" }}
-                accept=".png, .jpeg, .jpg"
-                onChange={(e) => setAvatar(e.target.files[0])}
-              />
-            </label>
-            <button type="submit">Підтвердити</button>
-          </form>
-          <button onClick={handleClose}>Видалити</button>
-          <button onClick={handleClose}>Назад</button>
-        </EditProfilePictureContainer>
-      )}
       <EditCoverBox>
         <MenuWrapper>
-          <button id="cover-button" onClick={handleClick}>
+          <button id="cover-button" onClick={handleClick} disabled={openAvatar}>
             <CameraAltIcon />
             <span>Редагувати обкладинку</span>
           </button>
@@ -133,7 +154,7 @@ export default function CoverMenu() {
             >
               <form className="bottom" onSubmit={handleSubmit}>
                 <label htmlFor="file">
-                  Завантажити
+                  {!cover && "Завантажити"}
                   <input
                     type="file"
                     id="file"
@@ -142,10 +163,10 @@ export default function CoverMenu() {
                     onChange={(e) => setCover(e.target.files[0])}
                   />
                 </label>
-                <button type="submit">Завантажити</button>
+                {cover && <button type="submit">Завантажити</button>}
               </form>
 
-              <button onClick={handleClose}>Видалити</button>
+              {!cover && <button onClick={handleClose}>Видалити</button>}
               <button onClick={handleClose}>Назад</button>
             </ModalContainer>
           )}

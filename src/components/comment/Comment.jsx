@@ -4,9 +4,9 @@ export const Comment = ({ comment }) => {
   const { data: user } = useGetUserQuery(comment?.userId);
   return (
     <Item className="comment">
-      <img src={user?.data.profilePicture} alt="" />
+      <img src={user?.data.user.profilePicture} alt="" />
       <div className="info">
-        <p>{user?.data.name}</p>
+        <p>{user?.data.user.name}</p>
         <p>{comment.desc}</p>
       </div>
       <span className="date">1 hour ago</span>

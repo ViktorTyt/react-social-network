@@ -24,15 +24,21 @@ import {
 } from "./ProfileTest.styled";
 import { useSelector } from "react-redux";
 import CoverMenu from "components/coverMenu/CoverMenu";
+import { useParams } from "react-router-dom";
+import { useGetUserQuery } from "redux/usersAPI";
 
 const Profile = () => {
-  const currentUser = useSelector((state) => state.state);
+  // const currentUser = useSelector((state) => state.state);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const id = useParams().id;
+  const { data: user } = useGetUserQuery(id);
+
+  console.log(user);
 
   return (
     <ProfileWrapper className="profile">
       {/* <EditCoverBox> */}
-      <CoverMenu />
+      <CoverMenu user={user?.data.user} />
       {/* </EditCoverBox> */}
 
       <PofileContainer className="profileContainer">
@@ -55,7 +61,7 @@ const Profile = () => {
             </a>
           </UserInfoLeft>
           <UserInfoCenter className="center">
-            <span>{currentUser.name}</span>
+            <span>{user?.data.user.name}</span>
             <div className="info">
               <div className="item">
                 <PlaceIcon />
@@ -74,7 +80,7 @@ const Profile = () => {
           </UserInfoRight>
         </UserInfo>
         <ShareTest />
-        <Posts profile={currentUser.name} />
+        <Posts profile={user?.data.user.name} />
       </PofileContainer>
     </ProfileWrapper>
   );

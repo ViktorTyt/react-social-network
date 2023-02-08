@@ -25,11 +25,14 @@ import { useEditLikesMutation } from "redux/postsAPI";
 import { useSelector } from "react-redux";
 
 const PostTest = ({ post }) => {
+  // console.log(post);
+
   const { _id } = useSelector((state) => state.state);
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(post.likes.includes(_id));
   const [commentOpen, setCommentOpen] = useState(false);
   const { data: user } = useGetUserQuery(post.userId);
+  // console.log(user?.data.user);
 
   const [ediLikes, { isLoading: isUpdating }] = useEditLikesMutation();
 
@@ -59,20 +62,24 @@ const PostTest = ({ post }) => {
       <PostContainer className="container">
         <User className="user">
           <UserInfo className="userInfo">
-            <img
-              src={
-                user?.data.profilePicture
-                  ? user.data.profilePicture
-                  : PF + post.profilePic
-              }
-              alt=""
-            />
+            <Link to={`/profile/${user?.data.user.name}/${post.userId}`}>
+              <img
+                src={
+                  user?.data.user.profilePicture
+                    ? user?.data.user.profilePicture
+                    : PF + "person/not_found.png"
+                }
+                alt=""
+              />
+            </Link>
             <UserInfoDetails className="details">
               <Link
                 to={`/profile/${post.userId}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <UserInfoName className="name">{user?.data.name}</UserInfoName>
+                <UserInfoName className="name">
+                  {user?.data.user.name}
+                </UserInfoName>
               </Link>
               <UserInfoDate className="date">
                 <TimeAgo date={post.createdAt} />

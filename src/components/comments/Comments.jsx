@@ -17,7 +17,7 @@ const Comments = ({ postId }) => {
 
   const [addComment, { isLoading: isUpdating }] = useAddCommentMutation();
 
-  const handleInputVhange = (e) => {
+  const handleInputChange = (e) => {
     setCommentText(e.target.value);
   };
 
@@ -27,6 +27,8 @@ const Comments = ({ postId }) => {
       userId: currentUser._id,
       desc: commentText,
     }).unwrap();
+
+    setCommentText("");
     // window.location.reload();
   };
   //Temporary
@@ -65,7 +67,7 @@ const Comments = ({ postId }) => {
           type="text"
           placeholder="write a comment"
           value={commentText}
-          onChange={handleInputVhange}
+          onChange={handleInputChange}
         />
         <button onClick={hadleSubmit}>Send</button>
       </CommentBox>

@@ -12,6 +12,12 @@ export const usersAPI = createApi({
       }),
       providesTags: ["Users"],
     }),
+    getFriends: builder.query({
+      query: (id) => ({
+        url: `/users/friends/${id}`,
+      }),
+      providesTags: ["Users"],
+    }),
     updateUser: builder.mutation({
       query(data) {
         const { id, ...body } = data;
@@ -50,4 +56,5 @@ export const {
   useGetUserQuery,
   useUpdateUserCoverMutation,
   useUpdateUserAvatarMutation,
+  useGetFriendsQuery,
 } = usersAPI;

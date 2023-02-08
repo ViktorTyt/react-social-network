@@ -39,7 +39,7 @@ export const ItemTitle = styled.span`
   color: ${theme.colors.lightMode.textColorSoft};
 `;
 
-export const User = styled.div`
+export const User = styled.li`
   display: flex;
   align-items: center;
   gap: 10px;

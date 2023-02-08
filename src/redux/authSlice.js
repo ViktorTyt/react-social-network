@@ -80,4 +80,7 @@ const authSlice = createSlice({
 });
 
 export const { loginSuccess, getCurrentSuccess } = authSlice.actions;
+
+export const selectCurrentUser = (state) => state.state;
+
 export default authSlice.reducer;

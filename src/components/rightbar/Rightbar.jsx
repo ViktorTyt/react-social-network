@@ -1,4 +1,8 @@
 import { useContext } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { selectCurrentUser } from "redux/authSlice";
+import { useGetFriendsQuery, useGetUserQuery } from "redux/usersAPI";
 // import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 // import { Add, Remove } from "@mui/icons-material";
@@ -18,117 +22,112 @@ import {
 
 export default function Rightbar() {
   const { user } = useContext(AuthContext);
+  const currentUser = useSelector(selectCurrentUser);
+  // const { data: friend } = useGetUserQuery(currentUser._id);
+  const { data, isSuccess } = useGetFriendsQuery(currentUser._id);
+  console.log(data);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   return (
-    <RightbarWrapper className="rightbar">
-      <RightbarContainer className="container">
-        <Item className="item">
-          <ItemTitle>Suggestion For You</ItemTitle>
-          <User className="user">
-            <UserInfo className="userInfo">
-              <UserImg
-                src={
-                  user?.profilePicture
-                    ? PF + user?.profilePicture
-                    : PF + "person/not_found.png"
-                }
-                alt="1.jpeg"
-              />
-              <UserTitle>John Doe</UserTitle>
-            </UserInfo>
-            <UserButtons className="buttons">
-              <button>Follow</button>
-              <button>Dismiss</button>
-            </UserButtons>
-          </User>
-          <User className="user">
-            <UserInfo className="userInfo">
-              <UserImg
-                src={
-                  user?.profilePicture
-                    ? PF + user?.profilePicture
-                    : PF + "person/not_found.png"
-                }
-                alt="1.jpeg"
-              />
-              <UserTitle>John Doe</UserTitle>
-            </UserInfo>
-            <UserButtons className="buttons">
-              <button>Follow</button>
-              <button>Dismiss</button>
-            </UserButtons>
-          </User>
-        </Item>
-        <Item className="item">
-          <ItemTitle>Latest Activities</ItemTitle>
-          <User className="user">
-            <UserInfo className="userInfo">
-              <UserImg
-                src={
-                  user?.profilePicture
-                    ? PF + user?.profilePicture
-                    : PF + "person/not_found.png"
-                }
-                alt="1.jpeg"
-              />
-              <UserTitle>
-                John Doe <span>changing their cover picture</span>
-              </UserTitle>
-            </UserInfo>
-            <UserCnahges>1 min ago</UserCnahges>
-          </User>
-          <User className="user">
-            <UserInfo className="userInfo">
-              <UserImg
-                src={
-                  user?.profilePicture
-                    ? PF + user?.profilePicture
-                    : PF + "person/not_found.png"
-                }
-                alt="1.jpeg"
-              />
-              <UserTitle>
-                John Doe <span>changing their cover picture</span>
-              </UserTitle>
-            </UserInfo>
-            <UserCnahges>1 min ago</UserCnahges>
-          </User>
-        </Item>
-        <Item className="item">
-          <ItemTitle>Online Friends</ItemTitle>
-          <User className="user">
-            <UserInfo className="userInfo">
-              <UserImg
-                src={
-                  user?.profilePicture
-                    ? PF + user?.profilePicture
-                    : PF + "person/not_found.png"
-                }
-                alt="1.jpeg"
-              />
-              <OnlineDot className="online"></OnlineDot>
-              <UserTitle>John Doe</UserTitle>
-            </UserInfo>
-          </User>
-          <User className="user">
-            <UserInfo className="userInfo">
-              <UserImg
-                src={
-                  user?.profilePicture
-                    ? PF + user?.profilePicture
-                    : PF + "person/not_found.png"
-                }
-                alt="1.jpeg"
-              />
-              <OnlineDot className="online"></OnlineDot>
-              <UserTitle>John Doe</UserTitle>
-            </UserInfo>
-          </User>
-        </Item>
-      </RightbarContainer>
-    </RightbarWrapper>
+    isSuccess && (
+      <RightbarWrapper className="rightbar">
+        <RightbarContainer className="container">
+          <Item className="item">
+            <ItemTitle>Suggestion For You</ItemTitle>
+            <ul>
+              {data?.data.map(({ _id, profilePicture, name }) => (
+                <User className="user" key={_id}>
+                  <UserInfo className="userInfo">
+                    <Link to={`/profile/${name}`}>
+                      <UserImg
+                        src={
+                          profilePicture
+                            ? profilePicture
+                            : PF + "person/not_found.png"
+                        }
+                        alt="1.jpeg"
+                      />
+                    </Link>
+                    <UserTitle>{name}</UserTitle>
+                  </UserInfo>
+                  <UserButtons className="buttons">
+                    <button>Follow</button>
+                    <button>Dismiss</button>
+                  </UserButtons>
+                </User>
+              ))}
+            </ul>
+          </Item>
+          <Item className="item">
+            <ItemTitle>Latest Activities</ItemTitle>
+            <User className="user">
+              <UserInfo className="userInfo">
+                <UserImg
+                  src={
+                    user?.profilePicture
+                      ? PF + user?.profilePicture
+                      : PF + "person/not_found.png"
+                  }
+                  alt="1.jpeg"
+                />
+                <UserTitle>
+                  John Doe <span>changing their cover picture</span>
+                </UserTitle>
+              </UserInfo>
+              <UserCnahges>1 min ago</UserCnahges>
+            </User>
+            <User className="user">
+              <UserInfo className="userInfo">
+                <UserImg
+                  src={
+                    user?.profilePicture
+                      ? PF + user?.profilePicture
+                      : PF + "person/not_found.png"
+                  }
+                  alt="1.jpeg"
+                />
+                <UserTitle>
+                  John Doe <span>changing their cover picture</span>
+                </UserTitle>
+              </UserInfo>
+              <UserCnahges>1 min ago</UserCnahges>
+            </User>
+          </Item>
+          <Item className="item">
+            <ItemTitle>Online Friends</ItemTitle>
+            <User className="user">
+              <UserInfo className="userInfo">
+                <UserImg
+                  src={
+                    user?.profilePicture
+                      ? PF + user?.profilePicture
+                      : PF + "person/not_found.png"
+                  }
+                  alt="1.jpeg"
+                />
+                <OnlineDot className="online"></OnlineDot>
+                <UserTitle>John Doe</UserTitle>
+              </UserInfo>
+            </User>
+            <User className="user">
+              <UserInfo className="userInfo">
+                <UserImg
+                  src={
+                    user?.profilePicture
+                      ? PF + user?.profilePicture
+                      : PF + "person/not_found.png"
+                  }
+                  alt="1.jpeg"
+                />
+                <OnlineDot className="online"></OnlineDot>
+                <UserTitle>John Doe</UserTitle>
+              </UserInfo>
+            </User>
+          </Item>
+        </RightbarContainer>
+      </RightbarWrapper>
+    )
   );
 }
 

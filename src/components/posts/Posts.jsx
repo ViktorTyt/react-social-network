@@ -14,8 +14,8 @@ export default function Posts({ profile }) {
   const { data: allPostByUser, isLoading: isLoadingUsers } =
     useAllPostByUserQuery(profile, { skip: !profile });
 
-  console.log(profile);
-  console.log("posts");
+  // console.log(profile);
+  // console.log("posts");
   //TEMPORARY
   // const posts = [
   //   {

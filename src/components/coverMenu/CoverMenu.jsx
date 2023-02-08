@@ -20,7 +20,7 @@ import { Cancel } from "@mui/icons-material";
 import userImageHandler from "helpers/userImageHandler";
 import { useCurrentUserQuery } from "redux/authAPI";
 
-export default function CoverMenu() {
+export default function CoverMenu({ user }) {
   const currentUser = useSelector((state) => state.state);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -59,13 +59,7 @@ export default function CoverMenu() {
 
     try {
       if (cover) {
-        await userImageHandler(
-          "cover",
-          cover,
-          updateCover,
-          setCover,
-          currentUser._id
-        );
+        await userImageHandler("cover", cover, updateCover, setCover, user._id);
         window.location.reload();
         // setToFetch(!toFetch);
       } else {
@@ -74,7 +68,7 @@ export default function CoverMenu() {
           avatar,
           updateAvatar,
           setAvatar,
-          currentUser._id
+          user._id
         );
         window.location.reload();
 
@@ -92,8 +86,8 @@ export default function CoverMenu() {
       <CoverPicture
         src={
           !cover
-            ? currentUser?.coverPicture
-              ? currentUser.coverPicture
+            ? user?.coverPicture
+              ? user.coverPicture
               : PF + "post/3.jpeg"
             : URL.createObjectURL(cover)
         }
@@ -103,8 +97,8 @@ export default function CoverMenu() {
         <ProfilePicture
           src={
             !avatar
-              ? currentUser?.profilePicture
-                ? currentUser.profilePicture
+              ? user?.profilePicture
+                ? user.profilePicture
                 : PF + "person/not_found.png"
               : URL.createObjectURL(avatar)
           }

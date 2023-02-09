@@ -23,6 +23,7 @@ import { TestAuthContext } from "./context/testAuthContext";
 import { useSelector } from "react-redux";
 import { useCurrentUserQuery } from "redux/authAPI";
 import { useGetUserQuery } from "redux/usersAPI";
+import Messenger from "pages/messenger/Messenger";
 function App() {
   // const { darkMode } = useContext(DarkModeContext);
   // const { currentUser } = useContext(TestAuthContext);
@@ -38,11 +39,11 @@ function App() {
         <>
           <Topbar />
           <div style={{ display: "flex" }}>
-            <Sidebar />
+            {/* <Sidebar /> */}
             <div style={{ flex: 6 }}>
               <Outlet />
             </div>
-            <Rightbar />
+            {/* <Rightbar /> */}
           </div>
         </>
       )
@@ -73,6 +74,10 @@ function App() {
         {
           path: "/profile/:name/:id",
           element: <ProfileTest />,
+        },
+        {
+          path: "/messenger",
+          element: <Messenger />,
         },
       ],
     },

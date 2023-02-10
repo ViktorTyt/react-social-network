@@ -19,12 +19,12 @@ import {
   UserInfoDate,
   PostContent,
   PostInfo,
-} from "./PostTest.module";
+} from "./Post.module";
 import { useGetUserQuery } from "redux/usersAPI";
 import { useEditLikesMutation } from "redux/postsAPI";
 import { useSelector } from "react-redux";
 
-const PostTest = ({ post }) => {
+const Post = ({ post }) => {
   // console.log(post);
 
   const { _id } = useSelector((state) => state.state);
@@ -116,4 +116,4 @@ const PostTest = ({ post }) => {
   );
 };
 
-export default PostTest;
+export default Post;

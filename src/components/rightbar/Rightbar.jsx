@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
 import { selectCurrentUser } from "redux/authSlice";
-import { useGetFriendsQuery, useGetUserQuery } from "redux/usersAPI";
-// import { Link } from "react-router-dom";
+import { useGetFriendsQuery } from "redux/usersAPI";
 import { AuthContext } from "../../context/AuthContext";
-// import { Add, Remove } from "@mui/icons-material";
+
 import {
   Item,
   ItemTitle,

@@ -1,37 +1,29 @@
-import Home from "./pages/home/Home";
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
-  Routes,
   Navigate,
   Outlet,
 } from "react-router-dom";
-import Login from "./pages/login/Login";
+import { useSelector } from "react-redux";
+
+import { useCurrentUserQuery } from "redux/authAPI";
+
 import Register from "./pages/register/Register";
-// import Profile from "./pages/profile/Profile";
-import ProfileTest from "./pages/profileTest/ProfileTest";
-import { useContext } from "react";
-// import { AuthContext } from "./context/AuthContext";
-import { DarkModeContext } from "./context/darkModeContext";
+import Login from "./pages/login/Login";
+import Home from "./pages/home/Home";
+import Profile from "pages/profile/Profile";
+import Messenger from "pages/messenger/Messenger";
 import Topbar from "./components/topbar/Topbar";
 import Sidebar from "./components/sidebar/Sidebar";
 import Rightbar from "./components/rightbar/Rightbar";
-import "./style.scss";
 
-import { TestAuthContext } from "./context/testAuthContext";
-import { useSelector } from "react-redux";
-import { useCurrentUserQuery } from "redux/authAPI";
-import { useGetUserQuery } from "redux/usersAPI";
-import Messenger from "pages/messenger/Messenger";
+// import { DarkModeContext } from "./context/darkModeContext";
 function App() {
   // const { darkMode } = useContext(DarkModeContext);
-  // const { currentUser } = useContext(TestAuthContext);
   const { token, isLoggedIn } = useSelector((state) => state.state);
-  // // console.log(currentUser);
 
   const Layout = () => {
-    const { data: currentUser, isFetching, error } = useCurrentUserQuery();
+    const { data: currentUser } = useCurrentUserQuery();
 
     return (
       isLoggedIn &&
@@ -39,11 +31,11 @@ function App() {
         <>
           <Topbar />
           <div style={{ display: "flex" }}>
-            {/* <Sidebar /> */}
+            <Sidebar />
             <div style={{ flex: 6 }}>
               <Outlet />
             </div>
-            {/* <Rightbar /> */}
+            <Rightbar />
           </div>
         </>
       )
@@ -73,7 +65,7 @@ function App() {
         },
         {
           path: "/profile/:name/:id",
-          element: <ProfileTest />,
+          element: <Profile />,
         },
         {
           path: "/messenger",

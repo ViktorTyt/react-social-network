@@ -1,3 +1,4 @@
+/* conversation */
 .conversation {
   display: flex;
   align-items: center;
@@ -5,11 +6,11 @@
   cursor: pointer;
   margin-top: 20px;
 }
-
+/* conversation:hover */
 .conversation:hover {
   background-color: rgb(245, 243, 243);
 }
-
+/* conversationImg */
 .conversationImg {
   width: 40px;
   height: 40px;
@@ -17,7 +18,7 @@
   object-fit: cover;
   margin-right: 20px;
 }
-
+/* conversationName */
 .conversationName {
   font-weight: 500;
 }

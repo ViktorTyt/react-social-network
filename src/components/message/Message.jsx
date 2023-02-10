@@ -12,7 +12,7 @@ export default function Message({ message, own }) {
   const choiceUser = own ? user : friend.data.user;
 
   return (
-    <div className={own ? "message own" : "message"}>
+    <div className={own ? "message own" : "message"} own={own}>
       <div className="messageTop">
         <img
           className="messageImg"
@@ -23,7 +23,9 @@ export default function Message({ message, own }) {
           }
           alt=""
         />
-        <p className="messageText">{message.text}</p>
+        <p className="messageText" own={own}>
+          {message.text}
+        </p>
       </div>
       <div className="messageBottom">
         <TimeAgo date={message.createdAt} />

@@ -1,5 +1,6 @@
 import { useGetUserQuery } from "redux/usersAPI.js";
 import { Item } from "./Comment.styled.js";
+
 export const Comment = ({ comment }) => {
   const { data: user } = useGetUserQuery(comment?.userId);
   return (

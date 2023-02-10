@@ -1,6 +1,7 @@
-import { MenuWrapper, ModalContainer } from "./ProfileMenu.styled";
 import { useState } from "react";
 import { useLogoutMutation } from "redux/authAPI";
+
+import { MenuWrapper, ModalContainer } from "./ProfileMenu.styled";
 
 export default function ProfileMenu({ name }) {
   const [anchorEl, setAnchorEl] = useState(null);

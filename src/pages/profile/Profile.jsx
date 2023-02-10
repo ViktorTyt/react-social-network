@@ -7,39 +7,32 @@ import PlaceIcon from "@mui/icons-material/Place";
 import LanguageIcon from "@mui/icons-material/Language";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+
+import CoverMenu from "components/coverMenu/CoverMenu";
+import ShareTest from "../../components/share/Share";
 import Posts from "../../components/posts/Posts";
-import ShareTest from "../../components/shareTest/ShareTest";
+
+import { useParams } from "react-router-dom";
+import { useGetUserQuery } from "redux/usersAPI";
 
 import {
   ProfileWrapper,
-  Images,
-  EditCoverBox,
   PofileContainer,
   UserInfo,
   UserInfoLeft,
   UserInfoCenter,
   UserInfoRight,
-  CoverPicture,
-  ProfilePicture,
-} from "./ProfileTest.styled";
-import { useSelector } from "react-redux";
-import CoverMenu from "components/coverMenu/CoverMenu";
-import { useParams } from "react-router-dom";
-import { useGetUserQuery } from "redux/usersAPI";
+} from "./Profile.styled";
 
 const Profile = () => {
-  // const currentUser = useSelector((state) => state.state);
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const id = useParams().id;
   const { data: user } = useGetUserQuery(id);
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <ProfileWrapper className="profile">
-      {/* <EditCoverBox> */}
       <CoverMenu user={user?.data.user} />
-      {/* </EditCoverBox> */}
 
       <PofileContainer className="profileContainer">
         <UserInfo className="uInfo">

@@ -11,8 +11,10 @@ import Messages from "../../assets/10.png";
 import Tutorials from "../../assets/11.png";
 import Courses from "../../assets/12.png";
 import Fund from "../../assets/13.png";
-// import { AuthContext } from "../../context/AuthContext";
-import { useContext } from "react";
+import { useSelector } from "react-redux";
+
+import { selectCurrentUser } from "redux/authSlice";
+
 import {
   Menu,
   Item,
@@ -26,13 +28,11 @@ import {
   MenuTitle,
   Hr,
 } from "./Sidebar.styled";
-import { useSelector } from "react-redux";
 
 export default function Sidebar() {
-  const currentUser = useSelector((state) => state.state);
+  const currentUser = useSelector(selectCurrentUser);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  console.log(PF);
 
   console.log("sidebar");
 

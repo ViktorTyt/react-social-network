@@ -1,10 +1,8 @@
-import { useContext } from "react";
 import { useSelector } from "react-redux";
-import { TestAuthContext } from "../../context/testAuthContext";
+
 import { StoriesWrapper, Story } from "./Stories.styled";
 
 const Stories = () => {
-  // const { currentUser } = useContext(TestAuthContext);
   const currentUser = useSelector((state) => state.state);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;

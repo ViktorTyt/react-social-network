@@ -1,3 +1,4 @@
+/* chatOnlineFriend */
 .chatOnlineFriend {
   display: flex;
   align-items: center;
@@ -5,7 +6,7 @@
   cursor: pointer;
   margin-top: 10px;
 }
-
+/* chatOnlineImgContainer */
 .chatOnlineImgContainer {
   position: relative;
   margin-right: 10px;

@@ -1,6 +1,12 @@
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import { Cancel } from "@mui/icons-material";
+
+import { useAddPostMutation } from "redux/postsAPI";
 import Image from "../../assets/img.png";
 import Map from "../../assets/map.png";
 import Friend from "../../assets/friend.png";
+
 import {
   ShareBottom,
   ShareBottomLeft,
@@ -8,11 +14,7 @@ import {
   ShareContainer,
   ShareTop,
   ShareWrapper,
-} from "./ShareTest.styled";
-import { useSelector } from "react-redux";
-import { useState } from "react";
-import { Cancel } from "@mui/icons-material";
-import { useAddPostMutation } from "redux/postsAPI";
+} from "./Share.styled";
 
 const Share = () => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;

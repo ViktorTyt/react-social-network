@@ -3,11 +3,11 @@
   flex-direction: column;
   margin-top: 20px;
 }
-
+/* messageTop */
 .messageTop{
     display: flex;
 }
-
+/* messageImg */
 .messageImg {
   width: 32px;
   height: 32px;
@@ -15,7 +15,7 @@
   object-fit: cover;
   margin-right: 10px;
 }
-
+/*  messageText*/
 .messageText{
     padding: 10px;
     border-radius: 20px;
@@ -23,12 +23,12 @@
     color: white;
     max-width: 300px;
 }
-
+/* messageBottom */
 .messageBottom{
     font-size: 12px;
     margin-top: 10px;
 }
-
+/*.message.own  */
 .message.own{
     align-items: flex-end;
 }

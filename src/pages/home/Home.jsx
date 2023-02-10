@@ -1,22 +1,22 @@
+// import Sidebar from "components/sidebar/Sidebar";
+// import Rightbar from "components/rightbar/Rightbar";
 import Stories from "../../components/stories/Stories";
-import ShareTest from "../../components/shareTest/ShareTest";
-import PostTest from "../../components/postTest/PostTest";
+import ShareTest from "../../components/share/Share";
+import Posts from "components/posts/Posts";
 
 import { HomeWrapper } from "./Home.styled";
-import Posts from "components/posts/Posts";
-import { useCurrentUserQuery } from "redux/authAPI";
 
 export default function Home() {
-  // const { data: currentUser, isFetching, error } = useCurrentUserQuery();
-  // console.log(currentUser);
   console.log("home");
   return (
     <>
+      {/* <Sidebar /> */}
       <HomeWrapper>
         <Stories />
         <ShareTest />
         <Posts />
       </HomeWrapper>
+      {/* <Rightbar /> */}
     </>
   );
 }

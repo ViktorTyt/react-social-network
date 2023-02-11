@@ -55,7 +55,9 @@ export default function Topbar() {
       </SearchContainer>
       <UserContainer>
         <PersonOutlined />
-        <EmailOutlined />
+        <Link to={`/messenger`}>
+          <EmailOutlined />
+        </Link>
         <NotificationsOutlined />
         <UserInfo>
           <Link to={`/profile/${currentUser.name}/${currentUser._id}`}>

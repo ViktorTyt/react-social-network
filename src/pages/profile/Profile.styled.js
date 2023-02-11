@@ -97,15 +97,25 @@ export const UserInfo = styled.div`
   ${device.tablet} {
     flex-direction: row;
     height: 180px;
-    padding: 50px;
+    padding: 50px 30px;
   }
 `;
 
 export const UserInfoLeft = styled.div`
   flex: 0.5;
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   gap: 10px;
+
+  button {
+    border: none;
+    background-color: #5271ff;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 
   /* ${device.desktop} {
     flex-wrap: nowrap;
@@ -117,12 +127,17 @@ export const UserInfoLeft = styled.div`
 `;
 
 export const UserInfoCenter = styled.div`
-  flex: 1.5;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
   span {
     font-size: 20px;
     font-weight: 500;
@@ -145,20 +160,23 @@ export const UserInfoCenter = styled.div`
       }
     }
   }
-  button {
-    border: none;
-    background-color: #5271ff;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
 `;
 
 export const UserInfoRight = styled.div`
   flex: 0.5;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   gap: 10px;
+
+  > button {
+    border: none;
+    background-color: ${(p) =>
+      p.own ? "gray" : p.alreadyFriend ? "darkred" : "#5271ff"};
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 `;

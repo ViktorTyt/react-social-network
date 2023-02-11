@@ -39,7 +39,7 @@ export default function Rightbar() {
               {data?.data.map(({ _id, profilePicture, name }) => (
                 <User className="user" key={_id}>
                   <UserInfo className="userInfo">
-                    <Link to={`/profile/${name}`}>
+                    <Link to={`/profile/${name}/${_id}`}>
                       <UserImg
                         src={
                           profilePicture

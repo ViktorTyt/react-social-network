@@ -3,12 +3,13 @@ import Topbar from "../../components/topbar/Topbar";
 import Conversation from "../../components/conversations/Conversation";
 import Message from "../../components/message/Message";
 import ChatOnline from "../../components/chatOnline/ChatOnline";
-import { useContext, useEffect, useRef, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "redux/authSlice";
+import { useGetConversationByUserQuery } from "redux/conversationsAPI";
+import { useGetMessagesQuery } from "redux/messagesAPI";
 
 export default function Messenger() {
   const [conversations, setConversations] = useState([]);
@@ -20,6 +21,10 @@ export default function Messenger() {
   const socket = useRef();
   const user = useSelector(selectCurrentUser);
   const scrollRef = useRef();
+  // const { data: conversations } = useGetConversationByUserQuery(user._id);
+  // const { data } = useGetMessagesQuery(currentChat?._id, {
+  //   skip: !currentChat,
+  // });
 
   useEffect(() => {
     socket.current = io("ws://localhost:8900");
@@ -42,16 +47,20 @@ export default function Messenger() {
     socket.current.emit("addUser", user._id);
     socket.current.on("getUsers", (users) => {
       setOnlineUsers(
-        user.followings.filter((f) => users.some((u) => u.userId === f))
+        user.followings?.filter((f) => users.some((u) => u.userId === f))
       );
     });
   }, [user]);
 
   useEffect(() => {
+    const config = {
+      headers: { Authorization: `Bearer ${user.token}` },
+    };
     const getConversations = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8800/api/conversations/" + user._id
+          "http://localhost:8800/api/conversations/" + user._id,
+          config
         );
         setConversations(res.data);
       } catch (err) {
@@ -59,13 +68,17 @@ export default function Messenger() {
       }
     };
     getConversations();
-  }, [user._id]);
+  }, [user]);
 
   useEffect(() => {
+    const config = {
+      headers: { Authorization: `Bearer ${user.token}` },
+    };
     const getMessages = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8800/api/messages/" + currentChat?._id
+          "http://localhost:8800/api/messages/" + currentChat?._id,
+          config
         );
         setMessages(res.data);
       } catch (err) {
@@ -73,7 +86,7 @@ export default function Messenger() {
       }
     };
     getMessages();
-  }, [currentChat]);
+  }, [currentChat, user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

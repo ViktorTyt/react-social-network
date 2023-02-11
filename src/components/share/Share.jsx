@@ -15,6 +15,7 @@ import {
   ShareTop,
   ShareWrapper,
 } from "./Share.styled";
+import { Link } from "react-router-dom";
 
 const Share = () => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -63,14 +64,16 @@ const Share = () => {
     <ShareWrapper className="share">
       <ShareContainer className="container">
         <ShareTop className="top">
-          <img
-            src={
-              currentUser.profilePicture
-                ? currentUser.profilePicture
-                : PF + "person/not_found.png"
-            }
-            alt=""
-          />
+          <Link to={`/profile/${currentUser?.name}/${currentUser?._id}`}>
+            <img
+              src={
+                currentUser.profilePicture
+                  ? currentUser.profilePicture
+                  : PF + "person/not_found.png"
+              }
+              alt=""
+            />
+          </Link>
           <input
             type="text"
             name="text"

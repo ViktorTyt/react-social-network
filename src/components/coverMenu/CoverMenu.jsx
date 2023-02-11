@@ -93,7 +93,7 @@ export default function CoverMenu({ user }) {
         }
         alt="coverPicture"
       />
-      <ProfilePictureBox>
+      <ProfilePictureBox own={currentUser._id === user?._id}>
         <ProfilePicture
           src={
             !avatar
@@ -133,7 +133,7 @@ export default function CoverMenu({ user }) {
           </EditProfilePictureContainer>
         )}
       </ProfilePictureBox>
-      <EditCoverBox>
+      <EditCoverBox own={currentUser._id === user._id}>
         <MenuWrapper>
           <button id="cover-button" onClick={handleClick} disabled={openAvatar}>
             <CameraAltIcon />

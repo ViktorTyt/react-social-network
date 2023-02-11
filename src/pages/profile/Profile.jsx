@@ -12,7 +12,7 @@ import CoverMenu from "components/coverMenu/CoverMenu";
 import ShareTest from "../../components/share/Share";
 import Posts from "../../components/posts/Posts";
 
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetUserQuery } from "redux/usersAPI";
 
 import {
@@ -23,12 +23,17 @@ import {
   UserInfoCenter,
   UserInfoRight,
 } from "./Profile.styled";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "redux/authSlice";
 
 const Profile = () => {
+  const currentUser = useSelector(selectCurrentUser);
   const id = useParams().id;
   const { data: user } = useGetUserQuery(id);
 
   // console.log(user);
+  const alreadyFriend = user?.data.user.followers.includes(currentUser._id);
+  const own = currentUser._id === id;
 
   return (
     <ProfileWrapper className="profile">
@@ -37,42 +42,44 @@ const Profile = () => {
       <PofileContainer className="profileContainer">
         <UserInfo className="uInfo">
           <UserInfoLeft className="left">
-            <a href="http://facebook.com">
-              <FacebookTwoToneIcon fontSize="large" />
-            </a>
-            <a href="http://facebook.com">
-              <InstagramIcon fontSize="large" />
-            </a>
-            <a href="http://facebook.com">
-              <TwitterIcon fontSize="large" />
-            </a>
-            <a href="http://facebook.com">
-              <LinkedInIcon fontSize="large" />
-            </a>
-            <a href="http://facebook.com">
-              <PinterestIcon fontSize="large" />
-            </a>
+            <div>
+              {currentUser._id === id ? (
+                <>
+                  <Link to={`/messenger`}>
+                    <button>Messenger</button>
+                  </Link>
+                </>
+              ) : (
+                <button>Повідомлення</button>
+              )}
+            </div>
           </UserInfoLeft>
           <UserInfoCenter className="center">
             <span>{user?.data.user.name}</span>
             <div className="info">
               <div className="item">
                 <PlaceIcon />
-                <span>USA</span>
+                <span>Адреса не вказана</span>
               </div>
               <div className="item">
                 <LanguageIcon />
-                <span>lama.dev</span>
+                <span>Сайт не вказаний</span>
               </div>
             </div>
-            <button>follow</button>
           </UserInfoCenter>
-          <UserInfoRight className="right">
-            <EmailOutlinedIcon />
-            <MoreVertIcon />
+          <UserInfoRight
+            className="right"
+            alreadyFriend={alreadyFriend}
+            own={own}
+          >
+            {!own ? (
+              <button>{alreadyFriend ? "unfollow" : "follow"}</button>
+            ) : (
+              <button>Змінити особисті дані</button>
+            )}
           </UserInfoRight>
         </UserInfo>
-        <ShareTest />
+        {currentUser._id === id && <ShareTest />}
         <Posts profile={user?.data.user.name} />
       </PofileContainer>
     </ProfileWrapper>

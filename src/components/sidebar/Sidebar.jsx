@@ -28,6 +28,7 @@ import {
   MenuTitle,
   Hr,
 } from "./Sidebar.styled";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   const currentUser = useSelector(selectCurrentUser);
@@ -40,18 +41,20 @@ export default function Sidebar() {
     <SidebarWrapper>
       <SidebarContainer>
         <Menu className="menu">
-          <User className="user">
-            <UserImg
-              src={
-                currentUser?.profilePicture
-                  ? currentUser?.profilePicture
-                  : PF + "person/not_found.png"
-              }
-              alt="1.jpeg"
-              className="topbarImg"
-            />
-            <UserTitle>{currentUser?.name}</UserTitle>
-          </User>
+          <Link to={`/profile/${currentUser?.name}/${currentUser?._id}`}>
+            <User className="user">
+              <UserImg
+                src={
+                  currentUser?.profilePicture
+                    ? currentUser?.profilePicture
+                    : PF + "person/not_found.png"
+                }
+                alt="1.jpeg"
+                className="topbarImg"
+              />
+              <UserTitle>{currentUser?.name}</UserTitle>
+            </User>
+          </Link>
           <Item className="item">
             <ItemImg src={Friends} alt="" />
             <span>Friends</span>

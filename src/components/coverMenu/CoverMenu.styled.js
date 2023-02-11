@@ -24,10 +24,10 @@ export const ProfilePictureBox = styled.div`
   height: 200px;
 
   > button {
+    display: ${(p) => (p.own ? "flex" : "none")};
     position: absolute;
     left: 150px;
     bottom: 15px;
-    display: flex;
     align-items: center;
     justify-content: center;
     width: 42px;
@@ -118,6 +118,8 @@ export const ModalContainer = styled.div`
 `;
 
 export const EditCoverBox = styled.div`
+  display: ${(p) => (p.own ? "flex" : "none")};
+
   position: absolute;
   right: 10px;
   bottom: 8px;

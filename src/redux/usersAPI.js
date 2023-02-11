@@ -49,6 +49,30 @@ export const usersAPI = createApi({
       },
       invalidatesTags: ["Users"],
     }),
+    follow: builder.mutation({
+      query({ id, userId }) {
+        console.log(id);
+        console.log(userId);
+        return {
+          url: `/users/${id}/follow`,
+          method: "PUT",
+          body: { userId },
+        };
+      },
+      invalidatesTags: ["Users"],
+    }),
+    unfollow: builder.mutation({
+      query({ id, userId }) {
+        console.log(id);
+        console.log(userId);
+        return {
+          url: `/users/${id}/unfollow`,
+          method: "PUT",
+          body: { userId },
+        };
+      },
+      invalidatesTags: ["Users"],
+    }),
   }),
 });
 
@@ -57,4 +81,6 @@ export const {
   useUpdateUserCoverMutation,
   useUpdateUserAvatarMutation,
   useGetFriendsQuery,
+  useFollowMutation,
+  useUnfollowMutation,
 } = usersAPI;

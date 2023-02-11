@@ -15,6 +15,10 @@ export default function ProfileMenu({ name }) {
     setAnchorEl(null);
   };
 
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <MenuWrapper>
       <button id="basic-button" onClick={handleClick}>
@@ -24,7 +28,7 @@ export default function ProfileMenu({ name }) {
         <ModalContainer id="basic-menu" open={open} onClose={handleClose}>
           <button onClick={handleClose}>Profile</button>
           <button onClick={handleClose}>My account</button>
-          <button onClick={logout}>Logout</button>
+          <button onClick={handleLogout}>Logout</button>
         </ModalContainer>
       )}
     </MenuWrapper>

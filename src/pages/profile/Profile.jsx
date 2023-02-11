@@ -13,7 +13,11 @@ import ShareTest from "../../components/share/Share";
 import Posts from "../../components/posts/Posts";
 
 import { Link, useParams } from "react-router-dom";
-import { useGetUserQuery } from "redux/usersAPI";
+import {
+  useFollowMutation,
+  useGetUserQuery,
+  useUnfollowMutation,
+} from "redux/usersAPI";
 
 import {
   ProfileWrapper,
@@ -30,6 +34,21 @@ const Profile = () => {
   const currentUser = useSelector(selectCurrentUser);
   const id = useParams().id;
   const { data: user } = useGetUserQuery(id);
+  const [follow] = useFollowMutation();
+  const [unfollow] = useUnfollowMutation();
+
+  const handleFollow = () => {
+    const data = {
+      id,
+      userId: currentUser._id,
+    };
+
+    if (!alreadyFriend) {
+      follow(data);
+    } else {
+      unfollow(data);
+    }
+  };
 
   // console.log(user);
   const alreadyFriend = user?.data.user.followers.includes(currentUser._id);
@@ -73,7 +92,9 @@ const Profile = () => {
             own={own}
           >
             {!own ? (
-              <button>{alreadyFriend ? "unfollow" : "follow"}</button>
+              <button onClick={handleFollow}>
+                {alreadyFriend ? "unfollow" : "follow"}
+              </button>
             ) : (
               <button>Змінити особисті дані</button>
             )}

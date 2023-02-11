@@ -11,7 +11,25 @@ export const conversationsAPI = createApi({
       query: (userId) => `/conversations/${userId}`,
       providesTags: ["Conversations"],
     }),
+    getConversationByTwoUser: builder.query({
+      query(data) {
+        const { firstUserId, secondUserId } = data;
+        console.log(data);
+        return { url: `/conversations/${firstUserId}/${secondUserId}` };
+      },
+      providesTags: ["Conversations"],
+    }),
+    addConversation: builder.mutation({
+      query(data) {
+        return { url: `/conversations`, method: "POST", body: { ...data } };
+      },
+      invalidatesTags: ["Conversations"],
+    }),
   }),
 });
 
-export const { useGetConversationByUserQuery } = conversationsAPI;
+export const {
+  useGetConversationByUserQuery,
+  useGetConversationByTwoUserQuery,
+  useAddConversationMutation,
+} = conversationsAPI;

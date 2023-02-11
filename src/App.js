@@ -30,13 +30,13 @@ function App() {
       currentUser && (
         <>
           <Topbar />
-          <div style={{ display: "flex" }}>
-            <Sidebar />
-            <div style={{ flex: 6 }}>
-              <Outlet />
-            </div>
-            <Rightbar />
+          {/* <div style={{ display: "flex" }}> */}
+          {/* <Sidebar /> */}
+          <div>
+            <Outlet />
           </div>
+          {/* <Rightbar /> */}
+          {/* </div> */}
         </>
       )
     );

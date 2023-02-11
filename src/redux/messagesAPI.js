@@ -11,7 +11,13 @@ export const messagesAPI = createApi({
       query: (conversationId) => `/messages/${conversationId}`,
       providesTags: ["Messages"],
     }),
+    addMessage: builder.mutation({
+      query(data) {
+        return { url: `/messages`, method: "POST", body: { ...data } };
+      },
+      invalidatesTags: ["Messages"],
+    }),
   }),
 });
 
-export const { useGetMessagesQuery } = messagesAPI;
+export const { useGetMessagesQuery, useAddMessageMutation } = messagesAPI;

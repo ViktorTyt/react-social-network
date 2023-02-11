@@ -3,6 +3,7 @@ import { device, theme } from "styles";
 
 export const HomeWrapper = styled.div`
   display: flex;
+  flex: 6;
   flex-direction: column;
   padding: 10px;
   background-color: ${theme.colors.lightMode.bgSoft};

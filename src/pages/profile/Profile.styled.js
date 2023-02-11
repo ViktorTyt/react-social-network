@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { device, theme } from "styles";
 
 export const ProfileWrapper = styled.div`
+  flex: 6;
   ${theme.colors.lightMode.bgSoft}
 `;
 

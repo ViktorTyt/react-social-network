@@ -29,10 +29,15 @@ import {
 } from "./Profile.styled";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "redux/authSlice";
+import Sidebar from "components/sidebar/Sidebar";
+import Rightbar from "components/rightbar/Rightbar";
+import { useState } from "react";
+import MessageModal from "components/messageModal/MessageModal";
 
 const Profile = () => {
   const currentUser = useSelector(selectCurrentUser);
   const id = useParams().id;
+  const [open, setOpen] = useState(false);
   const { data: user } = useGetUserQuery(id);
   const [follow] = useFollowMutation();
   const [unfollow] = useUnfollowMutation();
@@ -50,60 +55,75 @@ const Profile = () => {
     }
   };
 
+  const handleModal = () => {
+    setOpen(!open);
+  };
+
   // console.log(user);
   const alreadyFriend = user?.data.user.followers.includes(currentUser._id);
   const own = currentUser._id === id;
 
   return (
-    <ProfileWrapper className="profile">
-      <CoverMenu user={user?.data.user} />
+    <div style={{ display: "flex" }}>
+      <Sidebar />
+      <ProfileWrapper className="profile">
+        <CoverMenu user={user?.data.user} />
 
-      <PofileContainer className="profileContainer">
-        <UserInfo className="uInfo">
-          <UserInfoLeft className="left">
-            <div>
-              {currentUser._id === id ? (
-                <>
-                  <Link to={`/messenger`}>
-                    <button>Messenger</button>
-                  </Link>
-                </>
-              ) : (
-                <button>Повідомлення</button>
+        <PofileContainer className="profileContainer">
+          <UserInfo className="uInfo">
+            <UserInfoLeft className="left">
+              <div>
+                {currentUser._id === id ? (
+                  <>
+                    <Link to={`/messenger`}>
+                      <button>Messenger</button>
+                    </Link>
+                  </>
+                ) : (
+                  <button onClick={handleModal}>Повідомлення</button>
+                )}
+              </div>
+              {open && (
+                <MessageModal
+                  onModal={handleModal}
+                  user={user?.data.user}
+                  currentUser={currentUser}
+                />
               )}
-            </div>
-          </UserInfoLeft>
-          <UserInfoCenter className="center">
-            <span>{user?.data.user.name}</span>
-            <div className="info">
-              <div className="item">
-                <PlaceIcon />
-                <span>Адреса не вказана</span>
+            </UserInfoLeft>
+            <UserInfoCenter className="center">
+              <span>{user?.data.user.name}</span>
+              <div className="info">
+                <div className="item">
+                  <PlaceIcon />
+                  <span>Адреса не вказана</span>
+                </div>
+                <div className="item">
+                  <LanguageIcon />
+                  <span>Сайт не вказаний</span>
+                </div>
               </div>
-              <div className="item">
-                <LanguageIcon />
-                <span>Сайт не вказаний</span>
-              </div>
-            </div>
-          </UserInfoCenter>
-          <UserInfoRight
-            className="right"
-            alreadyFriend={alreadyFriend}
-            own={own}
-          >
-            {!own ? (
-              <button onClick={handleFollow}>
-                {alreadyFriend ? "unfollow" : "follow"}
-              </button>
-            ) : (
-              <button>Змінити особисті дані</button>
-            )}
-          </UserInfoRight>
-        </UserInfo>
-        {currentUser._id === id && <ShareTest />}
-        <Posts profile={user?.data.user.name} />
-      </PofileContainer>
-    </ProfileWrapper>
+            </UserInfoCenter>
+            <UserInfoRight
+              className="right"
+              alreadyFriend={alreadyFriend}
+              own={own}
+            >
+              {!own ? (
+                <button onClick={handleFollow}>
+                  {alreadyFriend ? "unfollow" : "follow"}
+                </button>
+              ) : (
+                <button>Змінити особисті дані</button>
+              )}
+            </UserInfoRight>
+          </UserInfo>
+          {currentUser._id === id && <ShareTest />}
+          <Posts profile={user?.data.user.name} />
+        </PofileContainer>
+      </ProfileWrapper>
+      <Rightbar />
+    </div>
   );
 };
 

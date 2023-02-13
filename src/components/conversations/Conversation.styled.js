@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { device, theme } from "styles";
 
-export const ConversationWrapper = styled.div`
+export const ConversationWrapper = styled.li`
   display: flex;
   align-items: center;
   padding: 10px;

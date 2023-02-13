@@ -58,6 +58,8 @@ const authSlice = createSlice({
           state.email = payload.data.email;
           state.profilePicture = payload.data.profilePicture;
           state.coverPicture = payload.data.coverPicture;
+          state.followings = payload.data.followings;
+          state.followers = payload.data.followers;
           state.isLoggedIn = true;
         }
       )

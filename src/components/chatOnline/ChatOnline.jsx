@@ -1,29 +1,54 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import "./chatOnline.css";
+import {
+  ImageContainer,
+  OnlineFriendInfo,
+  OnlineFriendName,
+  OnlineWrapper,
+} from "./ChatOnline.module";
 
-export default function ChatOnline({ onlineUsers, currentId, setCurrentChat }) {
+export default function ChatOnline({
+  token,
+  onlineUsers,
+  currentId,
+  setCurrentChat,
+}) {
   const [friends, setFriends] = useState([]);
   const [onlineFriends, setOnlineFriends] = useState([]);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   useEffect(() => {
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
     const getFriends = async () => {
-      const res = await axios.get("/users/friends/" + currentId);
-      setFriends(res.data);
+      console.log("before reaquest");
+      const res = await axios.get(
+        "http://localhost:8800/api/users/friends/" + currentId,
+        config
+      );
+      console.log(res);
+      setFriends(res.data.data);
     };
 
     getFriends();
-  }, [currentId]);
+  }, [currentId, token]);
 
   useEffect(() => {
-    setOnlineFriends(friends.filter((f) => onlineUsers.includes(f._id)));
+    console.log(friends);
+    console.log(onlineUsers);
+
+    setOnlineFriends(friends.filter((f) => onlineUsers?.includes(f._id)));
   }, [friends, onlineUsers]);
 
   const handleClick = async (user) => {
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
     try {
       const res = await axios.get(
-        `/conversations/find/${currentId}/${user._id}`
+        `/conversations/find/${currentId}/${user._id}`,
+        config
       );
       setCurrentChat(res.data);
     } catch (err) {
@@ -32,24 +57,31 @@ export default function ChatOnline({ onlineUsers, currentId, setCurrentChat }) {
   };
 
   return (
-    <div className="chatOnline">
-      {onlineFriends.map((o) => (
-        <div className="chatOnlineFriend" onClick={() => handleClick(o)}>
-          <div className="chatOnlineImgContainer">
-            <img
-              className="chatOnlineImg"
-              src={
-                o?.profilePicture
-                  ? PF + o.profilePicture
-                  : PF + "person/noAvatar.png"
-              }
-              alt=""
-            />
-            <div className="chatOnlineBadge"></div>
-          </div>
-          <span className="chatOnlineName">{o?.username}</span>
-        </div>
-      ))}
-    </div>
+    <OnlineWrapper className="chatOnline">
+      {onlineFriends.length > 0 &&
+        onlineFriends.map((o) => (
+          <OnlineFriendInfo
+            className="chatOnlineFriend"
+            onClick={() => handleClick(o)}
+            key={o._id}
+          >
+            <ImageContainer className="chatOnlineImgContainer">
+              <img
+                className="chatOnlineImg"
+                src={
+                  o?.profilePicture
+                    ? o.profilePicture
+                    : PF + "person/noAvatar.png"
+                }
+                alt=""
+              />
+              <div className="chatOnlineBadge"></div>
+            </ImageContainer>
+            <OnlineFriendName className="chatOnlineName">
+              {o?.name}
+            </OnlineFriendName>
+          </OnlineFriendInfo>
+        ))}
+    </OnlineWrapper>
   );
 }

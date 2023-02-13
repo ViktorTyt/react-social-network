@@ -33,6 +33,7 @@ import Sidebar from "components/sidebar/Sidebar";
 import Rightbar from "components/rightbar/Rightbar";
 import { useState } from "react";
 import MessageModal from "components/messageModal/MessageModal";
+import { useAddConversationMutation } from "redux/conversationsAPI";
 
 const Profile = () => {
   const currentUser = useSelector(selectCurrentUser);
@@ -41,6 +42,8 @@ const Profile = () => {
   const { data: user } = useGetUserQuery(id);
   const [follow] = useFollowMutation();
   const [unfollow] = useUnfollowMutation();
+  const [addConversation, { data, isLoading, isError }] =
+    useAddConversationMutation();
 
   const handleFollow = () => {
     const data = {
@@ -56,6 +59,20 @@ const Profile = () => {
   };
 
   const handleModal = () => {
+    if (!open) {
+      const createConv = async () => {
+        try {
+          const data = {
+            senderId: currentUser._id,
+            receiverId: user?.data.user._id,
+          };
+          await addConversation(data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      createConv();
+    }
     setOpen(!open);
   };
 
@@ -85,6 +102,7 @@ const Profile = () => {
               </div>
               {open && (
                 <MessageModal
+                  open={open}
                   onModal={handleModal}
                   user={user?.data.user}
                   currentUser={currentUser}

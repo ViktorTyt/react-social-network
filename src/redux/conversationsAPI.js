@@ -15,7 +15,7 @@ export const conversationsAPI = createApi({
       query(data) {
         const { firstUserId, secondUserId } = data;
         console.log(data);
-        return { url: `/conversations/${firstUserId}/${secondUserId}` };
+        return { url: `/conversations/find/${firstUserId}/${secondUserId}` };
       },
       providesTags: ["Conversations"],
     }),

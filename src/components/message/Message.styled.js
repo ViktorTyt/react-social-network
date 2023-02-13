@@ -22,7 +22,7 @@ export const MessageInfo = styled.div`
   > p {
     padding: 10px;
     border-radius: 20px;
-    background-color: ${(p) => (p.own ? "rgb(245, 241, 241)" : "#1877f2")};
+    background-color: ${(p) => (p.own ? "lightgray" : "#1877f2")};
     color: ${(p) => (p.own ? "black" : "white")};
     max-width: 300px;
   }

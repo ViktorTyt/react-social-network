@@ -1,7 +1,13 @@
 import styled from "@emotion/styled";
 import { device, theme } from "styles";
 
-export const OnlineFriendInfo = styled.div`
+export const OnlineWrapper = styled.ul`
+  /* height: 100%;
+  overflow-y: scroll; */
+  padding-right: 10px;
+`;
+
+export const OnlineFriendInfo = styled.li`
   display: flex;
   align-items: center;
   font-weight: 500;

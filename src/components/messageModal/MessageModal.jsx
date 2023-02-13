@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useAddConversationMutation,
   useGetConversationByTwoUserQuery,
@@ -8,15 +8,19 @@ import { ModalWrapper, ButtonClose } from "./MessageModal.styled";
 
 const MessageModal = ({ onModal, user, currentUser }) => {
   const [value, setValue] = useState("");
-  const [addConversation, { isSuccess, isLoading }] =
-    useAddConversationMutation();
-  const { data } = useGetConversationByTwoUserQuery(
+  const [getConv, setGetConv] = useState(true);
+  const { data, isSuccess } = useGetConversationByTwoUserQuery(
     {
       firstUserId: currentUser._id,
       secondUserId: user._id,
     },
-    { skip: !value && !isSuccess }
+    { skip: getConv }
   );
+
+  useEffect(() => {
+    setGetConv(!getConv);
+  }, []);
+
   const [addMessage] = useAddMessageMutation();
 
   console.log(data);
@@ -28,13 +32,19 @@ const MessageModal = ({ onModal, user, currentUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("submit", value);
-    try {
-      const data = { senderId: currentUser._id, receiverId: user._id };
-      await addConversation(data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setValue("");
+
+    if (isSuccess) {
+      try {
+        await addMessage({
+          conversationId: data._id,
+          sender: currentUser._id,
+          text: value,
+        });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setValue("");
+      }
     }
   };
   return (

@@ -1,7 +1,7 @@
 // import axios from "axios";
 // import { useEffect, useState } from "react";
 import { useGetUserQuery } from "redux/usersAPI";
-import "./conversation.css";
+import { ConversationWrapper } from "./Conversation.styled";
 
 export default function Conversation({ conversation, currentUser }) {
   // const [user, setUser] = useState(null);
@@ -22,7 +22,7 @@ export default function Conversation({ conversation, currentUser }) {
   // }, [currentUser, conversation]);
 
   return (
-    <div className="conversation">
+    <ConversationWrapper className="conversation">
       <img
         className="conversationImg"
         src={
@@ -33,6 +33,6 @@ export default function Conversation({ conversation, currentUser }) {
         alt=""
       />
       <span className="conversationName">{user?.data.user.name}</span>
-    </div>
+    </ConversationWrapper>
   );
 }

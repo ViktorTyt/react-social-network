@@ -11,8 +11,15 @@ export const OnlineFriendInfo = styled.li`
   display: flex;
   align-items: center;
   font-weight: 500;
+  padding: 10px;
   cursor: pointer;
   margin-top: 10px;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    background-color: gray;
+  }
 `;
 
 export const ImageContainer = styled.div`
@@ -39,9 +46,5 @@ export const ImageContainer = styled.div`
 `;
 
 export const OnlineFriendName = styled.span`
-  display: none;
-
-  ${device.tablet} {
-    display: flex;
-  }
+  display: flex;
 `;

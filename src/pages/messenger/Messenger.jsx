@@ -10,6 +10,8 @@ import { useSelector } from "react-redux";
 import { selectCurrentUser } from "redux/authSlice";
 import { useGetConversationByUserQuery } from "redux/conversationsAPI";
 import { useGetMessagesQuery } from "redux/messagesAPI";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import {
   ChatBox,
   ChatBoxChat,
@@ -19,6 +21,10 @@ import {
   MessengerWrapper,
   Wrapper,
   ChatOnlineFriends,
+  ConvList,
+  MenuBox,
+  ConvButton,
+  OnlineButton,
 } from "./Messenger.styled";
 
 export default function Messenger() {
@@ -28,6 +34,8 @@ export default function Messenger() {
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
+  const [isOpenConv, setIsOpenConv] = useState(false);
+  const [isOpenOnline, setIsOpenOnline] = useState(false);
   const socket = useRef();
   const user = useSelector(selectCurrentUser);
   const scrollRef = useRef();
@@ -143,19 +151,35 @@ export default function Messenger() {
 
   return (
     <MessengerWrapper className="messenger">
-      <ChatMenu className="chatMenu">
+      <MenuBox>
+        <ConvButton
+          onClick={() => setIsOpenConv(!isOpenConv)}
+          disabled={isOpenOnline}
+        >
+          <span>Розмови</span>{" "}
+          {isOpenConv ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        </ConvButton>
+        <OnlineButton
+          onClick={() => setIsOpenOnline(!isOpenOnline)}
+          disabled={isOpenConv}
+        >
+          Online {isOpenOnline ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        </OnlineButton>
+      </MenuBox>
+      <ChatMenu className="chatMenu" isOpenConv={isOpenConv}>
         <Wrapper className="chatMenuWrapper">
           <input placeholder="Search for friends" className="chatMenuInput" />
-          {conversations.map((c) => (
-            <ul onClick={() => setCurrentChat(c)}>
+          <ConvList>
+            {conversations.map((c) => (
               <Conversation
                 key={c._id}
                 conversation={c}
+                setCurrentChat={setCurrentChat}
                 currentUser={user}
                 currentChat={currentChat}
               />
-            </ul>
-          ))}
+            ))}
+          </ConvList>
         </Wrapper>
       </ChatMenu>
       <ChatBox className="chatBox">
@@ -172,7 +196,10 @@ export default function Messenger() {
                   </div>
                 ))}
               </ChatBoxChat>
-              <ChatBoxInputBox className="chatBoxBottom">
+              <ChatBoxInputBox
+                className="chatBoxBottom"
+                disabled={Boolean(!newMessage)}
+              >
                 <textarea
                   className="chatMessageInput"
                   placeholder="write something..."
@@ -191,7 +218,7 @@ export default function Messenger() {
           )}
         </Wrapper>
       </ChatBox>
-      <ChatOnlineFriends className="chatOnline">
+      <ChatOnlineFriends className="chatOnline" isOpenOnline={isOpenOnline}>
         <Wrapper className="chatOnlineWrapper">
           <ChatOnline
             onlineUsers={onlineUsers}

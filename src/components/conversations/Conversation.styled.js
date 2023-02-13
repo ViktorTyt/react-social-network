@@ -7,9 +7,11 @@ export const ConversationWrapper = styled.li`
   padding: 10px;
   cursor: pointer;
   margin-top: 20px;
+  background-color: ${(p) => (p.choiceConv ? "lightgray" : "inherit")};
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    background-color: rgb(245, 243, 243);
+    background-color: gray;
   }
 
   > img {
@@ -21,11 +23,7 @@ export const ConversationWrapper = styled.li`
   }
 
   > span {
-    display: none;
-
-    ${device.tablet} {
-      display: flex;
-      font-weight: 500;
-    }
+    display: flex;
+    font-weight: 500;
   }
 `;

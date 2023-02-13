@@ -1,28 +1,29 @@
 // import axios from "axios";
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetUserQuery } from "redux/usersAPI";
 import { ConversationWrapper } from "./Conversation.styled";
 
-export default function Conversation({ conversation, currentUser }) {
+export default function Conversation({
+  conversation,
+  currentUser,
+  currentChat,
+  setCurrentChat,
+}) {
   // const [user, setUser] = useState(null);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const friendId = conversation.members.find((m) => m !== currentUser._id);
   const { data: user } = useGetUserQuery(friendId);
 
-  // useEffect(() => {
-  //   const getUser = async () => {
-  //     try {
-  //       const res = await axios("/users?userId=" + friendId);
-  //       setUser(res.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   getUser();
-  // }, [currentUser, conversation]);
+  const choiceConv = conversation._id === currentChat._id;
+  console.log("conversation");
+  console.log(choiceConv);
 
   return (
-    <ConversationWrapper className="conversation">
+    <ConversationWrapper
+      className="conversation"
+      choiceConv={choiceConv}
+      onClick={() => setCurrentChat(conversation)}
+    >
       <img
         className="conversationImg"
         src={

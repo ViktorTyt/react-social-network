@@ -47,7 +47,7 @@ export default function ChatOnline({
     };
     try {
       const res = await axios.get(
-        `/conversations/find/${currentId}/${user._id}`,
+        `http://localhost:8800/api/conversations/find/${currentId}/${user._id}`,
         config
       );
       setCurrentChat(res.data);
